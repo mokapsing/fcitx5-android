@@ -47,7 +47,7 @@ class PreeditUi(override val ctx: Context, private val theme: Theme) : Ui {
         backgroundColor = barBackground
         horizontalPadding = dp(8)
         setTextColor(theme.keyTextColor)
-        textSize = 28f
+        textSize = 26f
     }
 
     private val upView = createTextView()
