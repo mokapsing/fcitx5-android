@@ -45,7 +45,7 @@ class AlphabetKey(
     Appearance.AltText(
         displayText = character,
         altText = "$label $punctuation",
-        textSize = 9f,
+        textSize = 18f,
         variant = variant
     ),
     setOf(
@@ -68,7 +68,7 @@ class AlphabetDigitKey(
     Appearance.AltText(
         displayText = character,
         altText = "$label $altText",
-        textSize = 9f
+        textSize = 18f
     ),
     setOf(
         Behavior.Press(KeyAction.FcitxKeyAction(character)),

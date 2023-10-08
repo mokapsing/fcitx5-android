@@ -26,37 +26,37 @@ class TextKeyboard(
 
         val Layout: List<List<KeyDef>> = listOf(
             listOf(
-                AlphabetDigitKey("Q", "手\n Q", 1),
-                AlphabetDigitKey("W", "田\n W", 2),
-                AlphabetDigitKey("E", "水\n E", 3),
-                AlphabetDigitKey("R", "口\n R", 4),
-                AlphabetDigitKey("T", "廿\n T", 5),
-                AlphabetDigitKey("Y", "卜\n Y", 6),
-                AlphabetDigitKey("U", "山\n U", 7),
-                AlphabetDigitKey("I", "戈\n I", 8),
-                AlphabetDigitKey("O", "人\n O", 9),
-                AlphabetDigitKey("P", "心\n P", 0)
+                AlphabetDigitKey("Q", "手", 1),
+                AlphabetDigitKey("W", "田", 2),
+                AlphabetDigitKey("E", "水", 3),
+                AlphabetDigitKey("R", "口", 4),
+                AlphabetDigitKey("T", "廿", 5),
+                AlphabetDigitKey("Y", "卜", 6),
+                AlphabetDigitKey("U", "山", 7),
+                AlphabetDigitKey("I", "戈", 8),
+                AlphabetDigitKey("O", "人", 9),
+                AlphabetDigitKey("P", "心", 0)
             ),
             listOf(
-                AlphabetKey("A", "日\n A", "@"),
-                AlphabetKey("S", "尸\n S", "*"),
-                AlphabetKey("D", "木\n D", "+"),
-                AlphabetKey("F", "火\n F", "-"),
-                AlphabetKey("G", "土\n G", "="),
-                AlphabetKey("H", "的\n H", "/"),
-                AlphabetKey("J", "十\n J", "#"),
-                AlphabetKey("K", "大\n K", "("),
-                AlphabetKey("L", "中\n L", ")")
+                AlphabetKey("A", "日", "@"),
+                AlphabetKey("S", "尸", "*"),
+                AlphabetKey("D", "木", "+"),
+                AlphabetKey("F", "火", "-"),
+                AlphabetKey("G", "土", "="),
+                AlphabetKey("H", "的", "/"),
+                AlphabetKey("J", "十", "#"),
+                AlphabetKey("K", "大", "("),
+                AlphabetKey("L", "中", ")")
             ),
             listOf(
                 CapsKey(),
-                AlphabetKey("Z", "重\n Z", "'"),
-                AlphabetKey("X", "止\n X", ":"),
-                AlphabetKey("C", "金\n C", "\""),
-                AlphabetKey("V", "女\n V", "?"),
-                AlphabetKey("B", "月\n B", "!"),
-                AlphabetKey("N", "弓\n N", "~"),
-                AlphabetKey("M", "一\n M", "\\"),
+                AlphabetKey("Z", "重", "'"),
+                AlphabetKey("X", "止", ":"),
+                AlphabetKey("C", "金", "\""),
+                AlphabetKey("V", "女", "?"),
+                AlphabetKey("B", "月", "!"),
+                AlphabetKey("N", "弓", "~"),
+                AlphabetKey("M", "一", "\\"),
                 BackspaceKey()
             ),
             listOf(
