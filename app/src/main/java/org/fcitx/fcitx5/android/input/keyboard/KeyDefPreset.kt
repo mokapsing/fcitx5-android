@@ -44,7 +44,7 @@ class AlphabetKey(
 ) : KeyDef(
     Appearance.AltText(
         displayText = label,
-        altText = " $character   $altText ",
+        altText = " $character   $punctuation ",
         textSize = 18f,
         variant = variant
     ),
