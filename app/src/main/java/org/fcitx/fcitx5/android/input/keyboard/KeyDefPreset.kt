@@ -81,10 +81,12 @@ class AlphabetDigitKey(
 ) {
     constructor(
         char: String,
+        label: string,
         digit: Int,
         popup: Array<Popup>? = null
     ) : this(
         char,
+        label,
         digit.toString(),
         FcitxKeyMapping.FcitxKey_KP_0 + digit,
         popup
