@@ -43,8 +43,8 @@ class AlphabetKey(
     popup: Array<Popup>? = null
 ) : KeyDef(
     Appearance.AltText(
-        displayText = character,
-        altText = "$label $punctuation",
+        displayText = label,
+        altText = "$character $punctuation",
         textSize = 18f,
         variant = variant
     ),
@@ -53,8 +53,8 @@ class AlphabetKey(
         Behavior.Swipe(KeyAction.FcitxKeyAction(punctuation))
     ),
     popup ?: arrayOf(
-        Popup.AltPreview(label, punctuation),
-        Popup.Keyboard(label)
+        Popup.AltPreview(character, punctuation),
+        Popup.Keyboard(character)
     )
 )
 
@@ -66,8 +66,8 @@ class AlphabetDigitKey(
     popup: Array<Popup>? = null
 ) : KeyDef(
     Appearance.AltText(
-        displayText = character,
-        altText = "$label $altText",
+        displayText = label,
+        altText = "$character $altText",
         textSize = 18f
     ),
     setOf(
@@ -75,8 +75,8 @@ class AlphabetDigitKey(
         Behavior.Swipe(KeyAction.SymAction(KeySym(sym), NumLockState))
     ),
     popup ?: arrayOf(
-        Popup.AltPreview(label, altText),
-        Popup.Keyboard(label)
+        Popup.AltPreview(character, altText),
+        Popup.Keyboard(character)
     )
 ) {
     constructor(
