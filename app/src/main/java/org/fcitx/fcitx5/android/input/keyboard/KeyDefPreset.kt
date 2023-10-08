@@ -45,7 +45,7 @@ class AlphabetKey(
     Appearance.AltText(
         displayText = label,
         altText = punctuation,
-        textSize = 23f,
+        textSize = 18f,
         variant = variant
     ),
     setOf(
@@ -53,7 +53,7 @@ class AlphabetKey(
         Behavior.Swipe(KeyAction.FcitxKeyAction(punctuation))
     ),
     popup ?: arrayOf(
-        Popup.AltPreview(character, punctuation),
+        Popup.AltPreview(label, punctuation),
         Popup.Keyboard(label)
     )
 )
@@ -68,14 +68,14 @@ class AlphabetDigitKey(
     Appearance.AltText(
         displayText = label,
         altText = altText,
-        textSize = 23f
+        textSize = 18f
     ),
     setOf(
         Behavior.Press(KeyAction.FcitxKeyAction(character)),
         Behavior.Swipe(KeyAction.SymAction(KeySym(sym), NumLockState))
     ),
     popup ?: arrayOf(
-        Popup.AltPreview(character, altText),
+        Popup.AltPreview(label, altText),
         Popup.Keyboard(label)
     )
 ) {
