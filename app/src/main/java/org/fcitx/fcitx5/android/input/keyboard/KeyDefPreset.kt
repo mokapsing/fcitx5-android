@@ -44,7 +44,7 @@ class AlphabetKey(
 ) : KeyDef(
     Appearance.AltText(
         displayText = label,
-        altText = " $($character.lowercase())   $punctuation ",
+        altText = " $character   $punctuation ".lowercase(),
         textSize = 18f,
         variant = variant
     ),
@@ -67,7 +67,7 @@ class AlphabetDigitKey(
 ) : KeyDef(
     Appearance.AltText(
         displayText = label,
-        altText = " $($character.lowercase())   $altText ",
+        altText = " $character   $altText ".lowercase(),
         textSize = 18f
     ),
     setOf(
