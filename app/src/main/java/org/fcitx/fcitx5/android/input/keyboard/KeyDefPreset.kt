@@ -37,12 +37,13 @@ class SymbolKey(
 
 class AlphabetKey(
     val character: String,
+    val label: String,
     val punctuation: String,
     variant: Variant = Variant.Normal,
     popup: Array<Popup>? = null
 ) : KeyDef(
     Appearance.AltText(
-        displayText = character,
+        displayText = label,
         altText = punctuation,
         textSize = 23f,
         variant = variant
@@ -53,18 +54,19 @@ class AlphabetKey(
     ),
     popup ?: arrayOf(
         Popup.AltPreview(character, punctuation),
-        Popup.Keyboard(character)
+        Popup.Keyboard(label)
     )
 )
 
 class AlphabetDigitKey(
     val character: String,
+    val label: String,
     altText: String,
     val sym: Int,
     popup: Array<Popup>? = null
 ) : KeyDef(
     Appearance.AltText(
-        displayText = character,
+        displayText = label,
         altText = altText,
         textSize = 23f
     ),
@@ -74,7 +76,7 @@ class AlphabetDigitKey(
     ),
     popup ?: arrayOf(
         Popup.AltPreview(character, altText),
-        Popup.Keyboard(character)
+        Popup.Keyboard(label)
     )
 ) {
     constructor(
