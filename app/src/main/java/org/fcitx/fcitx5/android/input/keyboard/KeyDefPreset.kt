@@ -81,7 +81,7 @@ class AlphabetDigitKey(
 ) {
     constructor(
         char: String,
-        label: string,
+        label: String,
         digit: Int,
         popup: Array<Popup>? = null
     ) : this(
