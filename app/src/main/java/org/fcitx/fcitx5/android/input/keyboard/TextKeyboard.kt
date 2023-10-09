@@ -200,12 +200,12 @@ class TextKeyboard(
         textKeys.forEach {
             if (it.def !is KeyDef.Appearance.AltText) return
             if (capsState != CapsState.None || languageCode == "en") {
-                it.mainText.text = it.def.displayText.let { str ->
+                it.mainText.text = it.def.keyCodeString.let { str ->
                     if (str.length != 1 || !str[0].isLetter()) return@forEach
                     if (keepLettersUppercase) str.uppercase() else transformAlphabet(str)
                 }
             } else {
-                it.mainText.text = it.def.keyCodeString
+                it.mainText.text = it.def.displayText
             }
         }
     }
