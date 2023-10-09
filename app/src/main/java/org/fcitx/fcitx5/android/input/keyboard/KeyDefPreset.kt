@@ -43,6 +43,7 @@ class AlphabetKey(
     popup: Array<Popup>? = null
 ) : KeyDef(
     Appearance.AltText(
+        keyString = character,
         displayText = label,
         altText = " $character   $punctuation ".lowercase(),
         textSize = 18f,
@@ -66,6 +67,7 @@ class AlphabetDigitKey(
     popup: Array<Popup>? = null
 ) : KeyDef(
     Appearance.AltText(
+        keyString = character,
         displayText = label,
         altText = " $character   $altText ".lowercase(),
         textSize = 18f

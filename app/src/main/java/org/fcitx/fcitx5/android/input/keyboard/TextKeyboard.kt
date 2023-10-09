@@ -152,6 +152,12 @@ class TextKeyboard(
             append(ime.displayName)
             ime.subMode.run { label.ifEmpty { name.ifEmpty { null } } }?.let { append(" ($it)") }
         }
+
+        if (space.mainText.text == "English") {
+            updateAlphabetKeys()
+        } else {
+            removeAlphabetKeysLabels()
+        }
     }
 
     override fun onPopupAction(action: PopupAction) {
@@ -202,6 +208,13 @@ class TextKeyboard(
                 if (str.length != 1 || !str[0].isLetter()) return@forEach
                 if (keepLettersUppercase) str.uppercase() else transformAlphabet(str)
             }
+        }
+    }
+
+    private fun removeAlphabetKeysLabels() {
+        textKeys.forEach {
+            if (it.def !is KeyDef.Appearance.AltText) return
+            it.mainText.text = it.def.keyString
         }
     }
 

@@ -42,6 +42,7 @@ open class KeyDef(
         ) : Appearance(percentWidth, variant, border, margin, viewId, soundEffect)
 
         class AltText(
+            keyString: String,
             displayText: String,
             val altText: String,
             textSize: Float,
