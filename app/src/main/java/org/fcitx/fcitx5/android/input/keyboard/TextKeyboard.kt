@@ -195,7 +195,7 @@ class TextKeyboard(
         lang.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
-    private fun updateAlphabetKeys(ime: InputMethodEntry) {
+    private fun updateAlphabetKeys(ime: InputMethodEntry?) {
         val languageCode = if (ime != NULL) ime.languageCode else "en"
         textKeys.forEach {
             if (it.def !is KeyDef.Appearance.AltText) return

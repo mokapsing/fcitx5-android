@@ -163,9 +163,6 @@ class KeyboardPreviewUi(override val ctx: Context, val theme: Theme) : Ui {
 
     fun setTheme(theme: Theme, background: Drawable? = null) {
         val fakeIme = InputMethodEntry("keyboard-us", _("English"), "en", "androidkeyboard")
-            .setLabel("En")
-            .setIcon("input-keyboard")
-            .setConfigurable(true)));
         setBackground(background ?: theme.backgroundDrawable(keyBorder))
         if (this::fakeKeyboardWindow.isInitialized) {
             fakeInputView.removeView(fakeKeyboardWindow)
