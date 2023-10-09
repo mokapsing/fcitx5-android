@@ -75,6 +75,7 @@ class PickerPageUi(override val ctx: Context, val theme: Theme, private val dens
     var popupActionListener: PopupActionListener? = null
 
     private val keyAppearance = Appearance.Text(
+        keyString = "",
         displayText = "",
         textSize = density.textSize,
         variant = Variant.Normal,

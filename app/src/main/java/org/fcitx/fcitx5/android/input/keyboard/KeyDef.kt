@@ -71,6 +71,7 @@ open class KeyDef(
         ) : Appearance(percentWidth, variant, border, margin, viewId, soundEffect)
 
         class ImageText(
+            keyString: String,
             displayText: String,
             textSize: Float,
             /**
@@ -85,7 +86,7 @@ open class KeyDef(
             border: Border = Border.Default,
             margin: Boolean = true,
             viewId: Int = -1
-        ) : Text(displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId)
+        ) : Text(keyString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId)
     }
 
     sealed class Behavior {

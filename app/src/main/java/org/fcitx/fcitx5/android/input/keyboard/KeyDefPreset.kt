@@ -21,6 +21,7 @@ class SymbolKey(
     popup: Array<Popup>? = null
 ) : KeyDef(
     Appearance.Text(
+        keyString = symbol,
         displayText = symbol,
         textSize = 23f,
         percentWidth = percentWidth,
@@ -116,6 +117,7 @@ class LayoutSwitchKey(
     variant: Variant = Variant.Alternative
 ) : KeyDef(
     Appearance.Text(
+        keyString,
         displayText,
         textSize = 16f,
         textStyle = Typeface.BOLD,
@@ -161,6 +163,7 @@ class CommaKey(
     variant: Variant,
 ) : KeyDef(
     Appearance.ImageText(
+        keyString = ",",
         displayText = ",",
         textSize = 23f,
         percentWidth = percentWidth,
@@ -208,6 +211,7 @@ class LanguageKey : KeyDef(
 
 class SpaceKey : KeyDef(
     Appearance.Text(
+        keyString = " ",
         displayText = " ",
         textSize = 13f,
         percentWidth = 0f,
@@ -290,6 +294,7 @@ class TextPickerSwitchKey(
     viewId: Int = -1
 ) : KeyDef(
     Appearance.Text(
+        keyString = text,
         displayText = text,
         textSize = 16f,
         percentWidth = percentWidth,
@@ -322,6 +327,7 @@ class NumPadKey(
     variant: Variant = Variant.Normal
 ) : KeyDef(
     Appearance.Text(
+        keyString,
         displayText,
         textSize = textSize,
         percentWidth = percentWidth,

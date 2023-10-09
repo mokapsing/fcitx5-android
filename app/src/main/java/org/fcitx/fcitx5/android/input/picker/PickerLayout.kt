@@ -32,6 +32,7 @@ class PickerLayout(context: Context, theme: Theme, switchKey: KeyDef) :
 
         class PunctuationKey(val symbol: String) : KeyDef(
             Appearance.Text(
+                keyString = symbol,
                 displayText = symbol,
                 textSize = 23f,
                 percentWidth = 0.1f,
