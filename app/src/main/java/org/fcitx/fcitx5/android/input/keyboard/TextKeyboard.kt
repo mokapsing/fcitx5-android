@@ -162,14 +162,14 @@ class TextKeyboard(
             is PopupAction.ShowKeyboardAction -> {
                 var label = action.keyboard.transLabel
                 if (capsState != CapsState.None || curLanguageCode == "en") {
-                    if (action.keyboard.label.length == 1 && action.keyboard.label[0].isLetter()) {
-                        label = transformAlphabet(label)
+                    if (action.keyboard.origLabel.length == 1 && action.keyboard.origLabel[0].isLetter()) {
+                        label = transformAlphabet(action.keyboard.origLabel)
                     } else {
-                        label.clear()
+                        label = ""
                     }
                 }
                 if (label.length > 0)
-                    action.copy(keyboard = KeyDef.Popup.Keyboard(label))
+                    action.copy(keyboard = KeyDef.Popup.Keyboard(label, action.keyboard.transLabel, action.keyboard.origLabel))
                 else action
             }
             else -> action
