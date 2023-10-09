@@ -46,7 +46,7 @@ class AlphabetKey(
     Appearance.AltText(
         keyCodeString = character,
         displayText = label,
-        altText = " $character   $punctuation ".lowercase(),
+        altText = punctuation,
         textSize = 18f,
         variant = variant
     ),
@@ -70,7 +70,7 @@ class AlphabetDigitKey(
     Appearance.AltText(
         keyCodeString = character,
         displayText = label,
-        altText = " $character   $altText ".lowercase(),
+        altText = altText,
         textSize = 18f
     ),
     setOf(

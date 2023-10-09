@@ -153,12 +153,11 @@ class TextKeyboard(
             ime.subMode.run { label.ifEmpty { name.ifEmpty { null } } }?.let { append(" ($it)") }
         }
 
-        if (space.mainText.text == "English") {
-            updateAlphabetKeys()
-        } else {
+        if (ime.languageCode == "en") {
             removeAlphabetKeysLabels()
+        } else {
+            updateAlphabetKeys()
         }
-        space.mainText.text = ime.languageCode
     }
 
     override fun onPopupAction(action: PopupAction) {
