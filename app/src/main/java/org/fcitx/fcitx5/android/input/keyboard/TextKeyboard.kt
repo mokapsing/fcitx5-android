@@ -178,7 +178,7 @@ class TextKeyboard(
             else -> CapsState.None
         }
         updateCapsButtonIcon()
-        updateAlphabetKeys(NULL)
+        updateAlphabetKeys(null)
     }
 
     private fun updateCapsButtonIcon() {
@@ -195,8 +195,8 @@ class TextKeyboard(
         lang.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
-    private fun updateAlphabetKeys(ime: InputMethodEntry?) {
-        val languageCode = if (ime != NULL) ime.languageCode else "en"
+    private fun updateAlphabetKeys(ime: InputMethodEntry? = null) {
+        val languageCode = if (ime != null) ime.languageCode else "en"
         textKeys.forEach {
             if (it.def !is KeyDef.Appearance.AltText) return
             if (capsState != CapsState.None || languageCode == "en") {
