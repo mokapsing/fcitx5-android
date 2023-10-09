@@ -11,7 +11,6 @@ import org.fcitx.fcitx5.android.data.prefs.AppPrefs
 import org.fcitx.fcitx5.android.data.prefs.ManagedPreference
 import org.fcitx.fcitx5.android.data.theme.Theme
 import org.fcitx.fcitx5.android.input.popup.PopupAction
-import org.fcitx.fcitx5.android.input.wm.InputWindow
 import splitties.views.imageResource
 
 @SuppressLint("ViewConstructor")
@@ -86,7 +85,6 @@ class TextKeyboard(
     }
 
     private val keepLettersUppercase by AppPrefs.getInstance().keyboard.keepLettersUppercase
-    private val fcitx by manager.fcitx()
 
     init {
         updateLangSwitchKey(showLangSwitchKey.getValue())
@@ -134,10 +132,10 @@ class TextKeyboard(
         if (capsState == CapsState.Once) switchCapsState()
     }
 
-    override fun onAttach() {
+    override fun onAttach(ime: InputMethodEntry) {
         capsState = CapsState.None
         updateCapsButtonIcon()
-        updateAlphabetKeys()
+        updateAlphabetKeys(ime)
     }
 
     override fun onReturnDrawableUpdate(returnDrawable: Int) {
@@ -180,7 +178,7 @@ class TextKeyboard(
             else -> CapsState.None
         }
         updateCapsButtonIcon()
-        updateAlphabetKeys()
+        updateAlphabetKeys(NULL)
     }
 
     private fun updateCapsButtonIcon() {
@@ -197,11 +195,11 @@ class TextKeyboard(
         lang.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
-    private fun updateAlphabetKeys() {
-        val ime = fcitx.runImmediately { inputMethodEntryCached }
+    private fun updateAlphabetKeys(ime: InputMethodEntry) {
+        val languageCode = if (ime != NULL) ime.languageCode else "en"
         textKeys.forEach {
             if (it.def !is KeyDef.Appearance.AltText) return
-            if (capsState != CapsState.None || ime.languageCode == "en") {
+            if (capsState != CapsState.None || languageCode == "en") {
                 it.mainText.text = it.def.displayText.let { str ->
                     if (str.length != 1 || !str[0].isLetter()) return@forEach
                     if (keepLettersUppercase) str.uppercase() else transformAlphabet(str)

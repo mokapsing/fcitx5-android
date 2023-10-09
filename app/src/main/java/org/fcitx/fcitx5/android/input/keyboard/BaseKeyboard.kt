@@ -439,7 +439,7 @@ abstract class BaseKeyboard(
         return true
     }
 
-    open fun onAttach() {
+    open fun onAttach(ime: InputMethodEntry) {
         // do nothing by default
     }
 
