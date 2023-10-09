@@ -11,6 +11,7 @@ import org.fcitx.fcitx5.android.data.prefs.AppPrefs
 import org.fcitx.fcitx5.android.data.prefs.ManagedPreference
 import org.fcitx.fcitx5.android.data.theme.Theme
 import org.fcitx.fcitx5.android.input.popup.PopupAction
+import org.fcitx.fcitx5.android.input.wm.InputWindow
 import splitties.views.imageResource
 
 @SuppressLint("ViewConstructor")
@@ -85,6 +86,7 @@ class TextKeyboard(
     }
 
     private val keepLettersUppercase by AppPrefs.getInstance().keyboard.keepLettersUppercase
+    private val fcitx by manager.fcitx()
 
     init {
         updateLangSwitchKey(showLangSwitchKey.getValue())
