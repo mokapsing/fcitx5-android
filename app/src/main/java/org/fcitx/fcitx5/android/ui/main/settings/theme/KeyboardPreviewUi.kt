@@ -163,14 +163,13 @@ class KeyboardPreviewUi(override val ctx: Context, val theme: Theme) : Ui {
     }
 
     fun setTheme(theme: Theme, background: Drawable? = null) {
-        val fakeIme = InputMethodEntry("keyboard-us", "English", "en", "androidkeyboard", "English", "en", false)
         setBackground(background ?: theme.backgroundDrawable(keyBorder))
         if (this::fakeKeyboardWindow.isInitialized) {
             fakeInputView.removeView(fakeKeyboardWindow)
         }
         fakeKawaiiBar.backgroundColor = if (keyBorder) Color.TRANSPARENT else theme.barColor
         fakeKeyboardWindow = TextKeyboard(ctx, theme).also {
-            it.onAttach(fakeIme)
+            it.onAttach()
         }
         fakeInputView.apply {
             add(fakeKeyboardWindow, lParams(matchConstraints, keyboardHeight) {
