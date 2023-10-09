@@ -215,7 +215,7 @@ class TextKeyboard(
     private fun removeAlphabetKeysLabels() {
         textKeys.forEach {
             if (it.def !is KeyDef.Appearance.AltText) return
-            it.mainText.text = it.def.keyString
+            it.mainText.text = it.def.keyCodeString
         }
     }
 

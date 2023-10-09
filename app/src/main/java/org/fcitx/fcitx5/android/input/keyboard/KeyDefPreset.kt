@@ -21,7 +21,7 @@ class SymbolKey(
     popup: Array<Popup>? = null
 ) : KeyDef(
     Appearance.Text(
-        keyString = symbol,
+        keyCodeString = symbol,
         displayText = symbol,
         textSize = 23f,
         percentWidth = percentWidth,
@@ -44,7 +44,7 @@ class AlphabetKey(
     popup: Array<Popup>? = null
 ) : KeyDef(
     Appearance.AltText(
-        keyString = character,
+        keyCodeString = character,
         displayText = label,
         altText = " $character   $punctuation ".lowercase(),
         textSize = 18f,
@@ -68,7 +68,7 @@ class AlphabetDigitKey(
     popup: Array<Popup>? = null
 ) : KeyDef(
     Appearance.AltText(
-        keyString = character,
+        keyCodeString = character,
         displayText = label,
         altText = " $character   $altText ".lowercase(),
         textSize = 18f
@@ -111,14 +111,13 @@ class CapsKey : KeyDef(
 )
 
 class LayoutSwitchKey(
-    keyString: String,
     displayText: String,
     val to: String = "",
     percentWidth: Float = 0.15f,
     variant: Variant = Variant.Alternative
 ) : KeyDef(
     Appearance.Text(
-        keyString,
+        displayText,
         displayText,
         textSize = 16f,
         textStyle = Typeface.BOLD,
@@ -164,7 +163,7 @@ class CommaKey(
     variant: Variant,
 ) : KeyDef(
     Appearance.ImageText(
-        keyString = ",",
+        keyCodeString = ",",
         displayText = ",",
         textSize = 23f,
         percentWidth = percentWidth,
@@ -212,7 +211,7 @@ class LanguageKey : KeyDef(
 
 class SpaceKey : KeyDef(
     Appearance.Text(
-        keyString = " ",
+        keyCodeString = " ",
         displayText = " ",
         textSize = 13f,
         percentWidth = 0f,
@@ -295,7 +294,7 @@ class TextPickerSwitchKey(
     viewId: Int = -1
 ) : KeyDef(
     Appearance.Text(
-        keyString = text,
+        keyCodeString = text,
         displayText = text,
         textSize = 16f,
         percentWidth = percentWidth,
@@ -321,7 +320,6 @@ class MiniSpaceKey : KeyDef(
 )
 
 class NumPadKey(
-    keyString: String,
     displayText: String,
     val sym: Int,
     textSize: Float = 16f,
@@ -329,7 +327,7 @@ class NumPadKey(
     variant: Variant = Variant.Normal
 ) : KeyDef(
     Appearance.Text(
-        keyString,
+        displayText,
         displayText,
         textSize = textSize,
         percentWidth = percentWidth,

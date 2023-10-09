@@ -26,7 +26,7 @@ open class KeyDef(
         }
 
         open class Text(
-            val keyString: String,
+            val keyCodeString: String,
             val displayText: String,
             val textSize: Float,
             /**
@@ -43,7 +43,7 @@ open class KeyDef(
         ) : Appearance(percentWidth, variant, border, margin, viewId, soundEffect)
 
         class AltText(
-            keyString: String,
+            keyCodeString: String,
             displayText: String,
             val altText: String,
             textSize: Float,
@@ -57,7 +57,7 @@ open class KeyDef(
             border: Border = Border.Default,
             margin: Boolean = true,
             viewId: Int = -1,
-        ) : Text(keyString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId)
+        ) : Text(keyCodeString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId)
 
         class Image(
             @DrawableRes
@@ -71,7 +71,7 @@ open class KeyDef(
         ) : Appearance(percentWidth, variant, border, margin, viewId, soundEffect)
 
         class ImageText(
-            keyString: String,
+            keyCodeString: String,
             displayText: String,
             textSize: Float,
             /**
@@ -86,7 +86,7 @@ open class KeyDef(
             border: Border = Border.Default,
             margin: Boolean = true,
             viewId: Int = -1
-        ) : Text(keyString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId)
+        ) : Text(keyCodeString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId)
     }
 
     sealed class Behavior {
