@@ -26,6 +26,7 @@ open class KeyDef(
         }
 
         open class Text(
+            val keyString: String,
             val displayText: String,
             val textSize: Float,
             /**
@@ -56,7 +57,7 @@ open class KeyDef(
             border: Border = Border.Default,
             margin: Boolean = true,
             viewId: Int = -1,
-        ) : Text(displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId)
+        ) : Text(keyString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId)
 
         class Image(
             @DrawableRes
