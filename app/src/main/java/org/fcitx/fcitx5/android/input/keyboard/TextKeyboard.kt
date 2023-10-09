@@ -153,6 +153,7 @@ class TextKeyboard(
             append(ime.displayName)
             ime.subMode.run { label.ifEmpty { name.ifEmpty { null } } }?.let { append(" ($it)") }
         }
+        updateAlphabetKeys()
     }
 
     override fun onPopupAction(action: PopupAction) {
