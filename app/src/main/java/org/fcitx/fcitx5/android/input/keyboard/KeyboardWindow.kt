@@ -101,15 +101,14 @@ class KeyboardWindow : InputWindow.SimpleInputWindow<KeyboardWindow>(), Essentia
     }
 
     private fun attachLayout(target: String) {
-        val ime = fcitx.runImmediately { inputMethodEntryCached }
         currentKeyboardName = target
         currentKeyboard?.let {
             it.keyActionListener = keyActionListener
             it.popupActionListener = popupActionListener
             keyboardView.apply { add(it, lParams(matchParent, matchParent)) }
-            it.onAttach(ime)
+            it.onAttach()
             it.onReturnDrawableUpdate(returnKeyDrawable.resourceId)
-            it.onInputMethodUpdate(ime)
+            it.onInputMethodUpdate(fcitx.runImmediately { inputMethodEntryCached })
         }
     }
 
@@ -159,7 +158,7 @@ class KeyboardWindow : InputWindow.SimpleInputWindow<KeyboardWindow>(), Essentia
         currentKeyboard?.let {
             it.keyActionListener = keyActionListener
             it.popupActionListener = popupActionListener
-            it.onAttach(fcitx.runImmediately { inputMethodEntryCached })
+            it.onAttach()
         }
         notifyBarLayoutChanged()
     }

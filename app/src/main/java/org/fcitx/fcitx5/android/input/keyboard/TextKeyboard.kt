@@ -132,10 +132,10 @@ class TextKeyboard(
         if (capsState == CapsState.Once) switchCapsState()
     }
 
-    override fun onAttach(ime: InputMethodEntry) {
+    override fun onAttach() {
         capsState = CapsState.None
         updateCapsButtonIcon()
-        updateAlphabetKeys(ime)
+        updateAlphabetKeys()
     }
 
     override fun onReturnDrawableUpdate(returnDrawable: Int) {
@@ -146,8 +146,9 @@ class TextKeyboard(
         punctuationMapping = mapping
         updatePunctuationKeys()
     }
-
+    private var curLanguageCode: String = "en"
     override fun onInputMethodUpdate(ime: InputMethodEntry) {
+        curLanguageCode = ime.languageCode
         space.mainText.text = buildString {
             append(ime.displayName)
             ime.subMode.run { label.ifEmpty { name.ifEmpty { null } } }?.let { append(" ($it)") }
@@ -159,9 +160,16 @@ class TextKeyboard(
             is PopupAction.PreviewAction -> action.copy(content = transformInputString(action.content))
             is PopupAction.PreviewUpdateAction -> action.copy(content = transformInputString(action.content))
             is PopupAction.ShowKeyboardAction -> {
-                val label = action.keyboard.label
-                if (label.length == 1 && label[0].isLetter())
-                    action.copy(keyboard = KeyDef.Popup.Keyboard(transformAlphabet(label)))
+                var label = action.keyboard.transLabel
+                if (capsState != CapsState.None || curLanguageCode == "en") {
+                    if (action.keyboard.origLabel.length == 1 && action.keyboard.origLabel[0].isLetter()) {
+                        label = transformAlphabet(action.keyboard.origLabel)
+                    } else {
+                        label = ""
+                    }
+                }
+                if (label.length > 0)
+                    action.copy(keyboard = KeyDef.Popup.Keyboard(label, action.keyboard.transLabel, action.keyboard.origLabel))
                 else action
             }
             else -> action
@@ -178,7 +186,7 @@ class TextKeyboard(
             else -> CapsState.None
         }
         updateCapsButtonIcon()
-        updateAlphabetKeys(null)
+        updateAlphabetKeys()
     }
 
     private fun updateCapsButtonIcon() {
@@ -195,11 +203,10 @@ class TextKeyboard(
         lang.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
-    private fun updateAlphabetKeys(ime: InputMethodEntry? = null) {
-        val languageCode = if (ime != null) ime.languageCode else "en"
+    private fun updateAlphabetKeys() {
         textKeys.forEach {
             if (it.def !is KeyDef.Appearance.AltText) return
-            if (capsState != CapsState.None || languageCode == "en") {
+            if (capsState != CapsState.None || curLanguageCode == "en") {
                 it.mainText.text = it.def.keyCodeString.let { str ->
                     if (str.length != 1 || !str[0].isLetter()) return@forEach
                     if (keepLettersUppercase) str.uppercase() else transformAlphabet(str)
