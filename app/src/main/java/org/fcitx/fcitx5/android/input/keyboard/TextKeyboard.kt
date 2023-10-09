@@ -152,12 +152,6 @@ class TextKeyboard(
             append(ime.displayName)
             ime.subMode.run { label.ifEmpty { name.ifEmpty { null } } }?.let { append(" ($it)") }
         }
-
-        if (ime.languageCode == "en") {
-            removeAlphabetKeysLabels()
-        } else {
-            updateAlphabetKeys()
-        }
     }
 
     override fun onPopupAction(action: PopupAction) {
@@ -202,19 +196,17 @@ class TextKeyboard(
     }
 
     private fun updateAlphabetKeys() {
+        val ime = fcitx.runImmediately { inputMethodEntryCached }
         textKeys.forEach {
             if (it.def !is KeyDef.Appearance.AltText) return
-            it.mainText.text = it.def.displayText.let { str ->
-                if (str.length != 1 || !str[0].isLetter()) return@forEach
-                if (keepLettersUppercase) str.uppercase() else transformAlphabet(str)
+            if (capsState != CapsState.None || ime.languageCode == "en") {
+                it.mainText.text = it.def.displayText.let { str ->
+                    if (str.length != 1 || !str[0].isLetter()) return@forEach
+                    if (keepLettersUppercase) str.uppercase() else transformAlphabet(str)
+                }
+            } else {
+                it.mainText.text = it.def.keyCodeString
             }
-        }
-    }
-
-    private fun removeAlphabetKeysLabels() {
-        textKeys.forEach {
-            if (it.def !is KeyDef.Appearance.AltText) return
-            it.mainText.text = it.def.keyCodeString
         }
     }
 
