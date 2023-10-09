@@ -32,7 +32,7 @@ class SymbolKey(
     ),
     popup ?: arrayOf(
         Popup.Preview(symbol),
-        Popup.Keyboard(symbol)
+        Popup.Keyboard(symbol, symbol, symbol)
     )
 )
 
