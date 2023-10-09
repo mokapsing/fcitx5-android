@@ -117,7 +117,7 @@ class LayoutSwitchKey(
     variant: Variant = Variant.Alternative
 ) : KeyDef(
     Appearance.Text(
-        displayText,
+        keyCodeString = displayText,
         displayText,
         textSize = 16f,
         textStyle = Typeface.BOLD,
@@ -327,7 +327,7 @@ class NumPadKey(
     variant: Variant = Variant.Normal
 ) : KeyDef(
     Appearance.Text(
-        displayText,
+        keyCodeString = displayText,
         displayText,
         textSize = textSize,
         percentWidth = percentWidth,
