@@ -15,7 +15,7 @@ class NumberRow(ctx: Context, theme: Theme) : BaseKeyboard(ctx, theme, Layout) {
             listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "0").map { digit ->
                 KeyDef(
                     KeyDef.Appearance.Text(
-                        keySting = digit,
+                        keyString = digit,
                         displayText = digit,
                         textSize = 21f,
                         border = KeyDef.Appearance.Border.Off,

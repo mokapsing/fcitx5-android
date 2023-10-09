@@ -158,7 +158,7 @@ class TextKeyboard(
         } else {
             removeAlphabetKeysLabels()
         }
-        space.mainText.text = ime.subMode.languageCode
+        space.mainText.text = ime.languageCode
     }
 
     override fun onPopupAction(action: PopupAction) {

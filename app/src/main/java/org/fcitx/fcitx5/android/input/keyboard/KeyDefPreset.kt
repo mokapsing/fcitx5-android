@@ -111,6 +111,7 @@ class CapsKey : KeyDef(
 )
 
 class LayoutSwitchKey(
+    keyString: String,
     displayText: String,
     val to: String = "",
     percentWidth: Float = 0.15f,
@@ -320,6 +321,7 @@ class MiniSpaceKey : KeyDef(
 )
 
 class NumPadKey(
+    keyString: String,
     displayText: String,
     val sym: Int,
     textSize: Float = 16f,
