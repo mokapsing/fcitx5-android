@@ -161,16 +161,9 @@ class TextKeyboard(
             is PopupAction.PreviewAction -> action.copy(content = transformInputString(action.content))
             is PopupAction.PreviewUpdateAction -> action.copy(content = transformInputString(action.content))
             is PopupAction.ShowKeyboardAction -> {
-                var label = action.keyboard.transLabel
-                if (capsState != CapsState.None || curLanguageCode == "en") {
-                    if (action.keyboard.origLabel.length == 1 && action.keyboard.origLabel[0].isLetter()) {
-                        label = transformAlphabet(action.keyboard.origLabel)
-                    } else {
-                        label = ""
-                    }
-                }
-                if (label.length > 0)
-                    action.copy(keyboard = KeyDef.Popup.Keyboard(label, action.keyboard.transLabel, action.keyboard.origLabel))
+                val label = action.keyboard.label
+                if (label.length == 1 && label[0].isLetter())
+                    action.copy(keyboard = KeyDef.Popup.Keyboard(transformAlphabet(label)))
                 else action
             }
             else -> action

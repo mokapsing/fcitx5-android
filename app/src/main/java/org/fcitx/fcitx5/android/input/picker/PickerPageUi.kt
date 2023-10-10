@@ -224,7 +224,7 @@ class PickerPageUi(override val ctx: Context, val theme: Theme, private val dens
                         onPopupAction(
                             PopupAction.ShowKeyboardAction(
                                 view.id,
-                                KeyDef.Popup.Keyboard(text, text, text),
+                                KeyDef.Popup.Keyboard(text),
                                 bounds
                             )
                         )
