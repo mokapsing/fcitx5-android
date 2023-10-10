@@ -26,16 +26,16 @@ class TextKeyboard(
 
         val Layout: List<List<KeyDef>> = listOf(
             listOf(
-                AlphabetDigitKey("Q", "手", "1"),
-                AlphabetDigitKey("W", "田", "2"),
-                AlphabetDigitKey("E", "水", "3"),
-                AlphabetDigitKey("R", "口", "4"),
-                AlphabetDigitKey("T", "廿", "5"),
-                AlphabetDigitKey("Y", "卜", "6"),
-                AlphabetDigitKey("U", "山", "7"),
-                AlphabetDigitKey("I", "戈", "8"),
-                AlphabetDigitKey("O", "人", "9"),
-                AlphabetDigitKey("P", "心", "0")
+                AlphabetKey("Q", "手", "1"),
+                AlphabetKey("W", "田", "2"),
+                AlphabetKey("E", "水", "3"),
+                AlphabetKey("R", "口", "4"),
+                AlphabetKey("T", "廿", "5"),
+                AlphabetKey("Y", "卜", "6"),
+                AlphabetKey("U", "山", "7"),
+                AlphabetKey("I", "戈", "8"),
+                AlphabetKey("O", "人", "9"),
+                AlphabetKey("P", "心", "0")
             ),
             listOf(
                 AlphabetKey("A", "日", "@"),

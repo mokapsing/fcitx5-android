@@ -262,13 +262,13 @@ abstract class BaseKeyboard(
                             if (popupOnKeyPress) {
                                 when (event.type) {
                                     GestureType.Down -> onPopupAction(
-                                        PopupAction.PreviewAction(view.id, it.content, view.bounds)
+                                        PopupAction.PreviewAction(view.id, it.content, it.labelContent, view.bounds)
                                     )
                                     GestureType.Move -> {
                                         val triggered = swipeSymbolDirection.checkY(event.totalY)
                                         val text = if (triggered) it.alternative else it.content
                                         onPopupAction(
-                                            PopupAction.PreviewUpdateAction(view.id, text)
+                                            PopupAction.PreviewUpdateAction(view.id, text, it.labelContent)
                                         )
                                     }
                                     GestureType.Up -> {
@@ -287,7 +287,7 @@ abstract class BaseKeyboard(
                             if (popupOnKeyPress) {
                                 when (event.type) {
                                     GestureType.Down -> onPopupAction(
-                                        PopupAction.PreviewAction(view.id, it.content, view.bounds)
+                                        PopupAction.PreviewAction(view.id, it.content, it.labelContent, view.bounds)
                                     )
                                     GestureType.Up -> {
                                         onPopupAction(PopupAction.DismissAction(view.id))

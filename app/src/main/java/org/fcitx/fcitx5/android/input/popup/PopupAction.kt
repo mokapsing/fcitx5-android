@@ -11,12 +11,14 @@ sealed class PopupAction {
     data class PreviewAction(
         override val viewId: Int,
         val content: String,
+        val labelContent: String,
         val bounds: Rect
     ) : PopupAction()
 
     data class PreviewUpdateAction(
         override val viewId: Int,
         val content: String,
+        val labelContent: String,
     ) : PopupAction()
 
     data class DismissAction(
