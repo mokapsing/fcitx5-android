@@ -31,7 +31,7 @@ class SymbolKey(
         Behavior.Press(KeyAction.FcitxKeyAction(symbol))
     ),
     popup ?: arrayOf(
-        Popup.Preview(symbol),
+        Popup.Preview(symbol, symbol),
         Popup.Keyboard(symbol)
     )
 )
@@ -55,7 +55,7 @@ class AlphabetKey(
         Behavior.Swipe(KeyAction.FcitxKeyAction(punctuation))
     ),
     popup ?: arrayOf(
-        Popup.AltPreview(label, punctuation),
+        Popup.AltPreview(character, label, punctuation),
         Popup.Keyboard(character)
     )
 )
@@ -78,7 +78,7 @@ class AlphabetDigitKey(
         Behavior.Swipe(KeyAction.SymAction(KeySym(sym), NumLockState))
     ),
     popup ?: arrayOf(
-        Popup.AltPreview(label, altText),
+        Popup.AltPreview(character, label, altText),
         Popup.Keyboard(character)
     )
 ) {
@@ -174,7 +174,7 @@ class CommaKey(
         Behavior.Press(KeyAction.FcitxKeyAction(","))
     ),
     arrayOf(
-        Popup.Preview(","),
+        Popup.Preview(",", ","),
         Popup.Menu(
             arrayOf(
                 Popup.Menu.Item(

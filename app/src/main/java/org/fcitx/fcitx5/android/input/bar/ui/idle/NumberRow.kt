@@ -24,7 +24,7 @@ class NumberRow(ctx: Context, theme: Theme) : BaseKeyboard(ctx, theme, Layout) {
                     setOf(
                         KeyDef.Behavior.Press(KeyAction.SymAction(KeySym(digit.codePointAt(0))))
                     ),
-                    arrayOf(KeyDef.Popup.Preview(digit))
+                    arrayOf(KeyDef.Popup.Preview(digit, digit))
                 )
             }
         )

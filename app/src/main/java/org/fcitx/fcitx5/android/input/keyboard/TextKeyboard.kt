@@ -158,8 +158,12 @@ class TextKeyboard(
 
     override fun onPopupAction(action: PopupAction) {
         val newAction = when (action) {
-            is PopupAction.PreviewAction -> action.copy(content = transformInputString(action.content))
-            is PopupAction.PreviewUpdateAction -> action.copy(content = transformInputString(action.content))
+            var popLabel = action.labelContent
+            if (capsState != CapsState.None || curLanguageCode == "en") {
+                popLabel = transformInputString(action.content)
+            }
+            is PopupAction.PreviewAction -> action.copy(content = popLabel)
+            is PopupAction.PreviewUpdateAction -> action.copy(content = popLabel)
             is PopupAction.ShowKeyboardAction -> {
                 val label = action.keyboard.label
                 if (label.length == 1 && label[0].isLetter())
