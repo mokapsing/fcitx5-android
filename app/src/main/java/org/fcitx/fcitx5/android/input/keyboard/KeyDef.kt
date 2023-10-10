@@ -114,7 +114,7 @@ open class KeyDef(
     sealed class Popup {
         open class Preview(val content: String, val labelContent: String) : Popup()
 
-        class AltPreview(content: String, val labelContent: String, val alternative: String) : Preview(content, labelContent)
+        class AltPreview(content: String, labelContent: String, val alternative: String) : Preview(content, labelContent)
 
         class Keyboard(val label: String) : Popup()
 
