@@ -1,0 +1,102 @@
+name: Manually-build-in-one
+
+on: workflow_dispatch
+
+jobs:
+  build_pull_request:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-22.04
+          - macos-13
+          # - windows-2022
+        abi:
+          #- armeabi-v7a
+          - arm64-v8a
+          #- x86
+          #- x86_64
+    env:
+      BUILD_ABI: ${{ matrix.abi }}
+    steps:
+      - name: Fetch source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Regenerate symlinks pointing to submodule (Windows)
+        if: ${{ matrix.os == 'windows-2022' }}
+        run: |
+          Remove-Item -Recurse app/src/main/assets/usr/share
+          git checkout -- *
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Setup Android environment
+        uses: android-actions/setup-android@v2
+
+      - name: Install Android NDK
+        run: |
+          sdkmanager --install "cmake;3.22.1"
+
+      - name: Install system dependencies (Ubuntu)
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
+        run: |
+          sudo apt update
+          sudo apt install extra-cmake-modules gettext
+
+      - name: Install system dependencies (macOS)
+        if: ${{ matrix.os == 'macos-13' }}
+        run: |
+          brew install extra-cmake-modules
+
+      - name: Install system dependencies (Windows)
+        if: ${{ matrix.os == 'windows-2022' }}
+        run: |
+          C:/msys64/usr/bin/pacman -S --noconfirm mingw-w64-ucrt-x86_64-gettext mingw-w64-ucrt-x86_64-extra-cmake-modules
+          Add-Content $env:GITHUB_PATH "C:/msys64/ucrt64/bin"
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Build APK
+        run: |
+          ./gradlew :app:assembleRelease
+          ./gradlew :assembleReleasePlugins
+
+      - name: Pack plugins
+        shell: bash
+        run: |
+          find plugin/*/build/outputs/apk/release -type f -print0 | while IFS= read -r -d '' source_file; do
+            # 获取第二级目录名作为前缀 
+            prefix=$(basename "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$source_file")")")")")")
+            # 获取文件名 
+            filename=$(basename "$source_file") 
+            # 构建目标文件路径，加上前缀
+            target_file="app/build/outputs/apk/release/$prefix"_"$filename"
+            mv "$source_file" "$target_file"
+          done
+
+      - name: Sign all App
+        uses: kevin-david/zipalign-sign-android-release@v1.1
+        id: sign_apk
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          alias: ${{ secrets.KEY_ALIAS }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+          zipAlign: true
+        env:
+          BUILD_TOOLS_VERSION: "31.0.0"
+
+      - name: Upload app
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-${{ matrix.os }}-${{ matrix.abi }}
+          path: app/build/outputs/apk/release/
