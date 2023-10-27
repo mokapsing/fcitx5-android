@@ -30,8 +30,6 @@ class AppPrefs(private val sharedPreferences: SharedPreferences) {
 
     inner class Advanced : ManagedPreferenceCategory(R.string.advanced, sharedPreferences) {
         val ignoreSystemCursor = switch(R.string.ignore_sys_cursor, "ignore_system_cursor", true)
-        val resetCursorAfterCommit =
-            switch(R.string.reset_cursor_after_commit, "reset_cursor_after_commit", true)
         val hideKeyConfig = switch(R.string.hide_key_config, "hide_key_config", true)
         val disableAnimation = switch(R.string.disable_animation, "disable_animation", false)
         val vivoKeypressWorkaround = switch(
@@ -147,6 +145,8 @@ class AppPrefs(private val sharedPreferences: SharedPreferences) {
         )
         val showVoiceInputButton =
             switch(R.string.show_voice_input_button, "show_voice_input_button", false)
+        val expandKeypressArea =
+            switch(R.string.expand_keypress_area, "expand_keypress_area", false)
         val swipeSymbolDirection = list(
             R.string.swipe_symbol_behavior,
             "swipe_symbol_behavior",
@@ -363,7 +363,6 @@ class AppPrefs(private val sharedPreferences: SharedPreferences) {
                 internal.verboseLog,
                 internal.editorInfoInspector,
                 advanced.ignoreSystemCursor,
-                advanced.resetCursorAfterCommit,
                 advanced.disableAnimation,
                 advanced.vivoKeypressWorkaround
             ).forEach {

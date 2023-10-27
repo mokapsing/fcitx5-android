@@ -115,7 +115,6 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
     implementation(libs.androidx.viewpager2)
-    implementation(libs.konbini)
     implementation(libs.material)
     implementation(libs.arrow)
     implementation(libs.imagecropper)
@@ -137,4 +136,11 @@ dependencies {
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.lifecycle.testing)
     androidTestImplementation(libs.junit)
+}
+
+// remove Baseline Profile Installer or whatever it is...
+configurations {
+    all {
+        exclude(group = "androidx.profileinstaller", module = "profileinstaller")
+    }
 }

@@ -10,13 +10,13 @@
 
 namespace fcitx {
 
-class AndroidInputContext : public InputContext {
+class AndroidInputContext : public InputContextV2 {
 public:
     AndroidInputContext(AndroidFrontend *frontend,
                         InputContextManager &inputContextManager,
                         int uid,
                         const std::string &pkgName)
-            : InputContext(inputContextManager, pkgName),
+            : InputContextV2(inputContextManager, pkgName),
               frontend_(frontend),
               uid_(uid) {
         created();
@@ -30,7 +30,11 @@ public:
     [[nodiscard]] const char *frontend() const override { return "androidfrontend"; }
 
     void commitStringImpl(const std::string &text) override {
-        frontend_->commitString(text);
+        frontend_->commitString(text, -1);
+    }
+
+    void commitStringWithCursorImpl(const std::string &text, size_t cursor) override {
+        frontend_->commitString(text, static_cast<int>(cursor));
     }
 
     void forwardKeyImpl(const ForwardKeyEvent &key) override {
@@ -38,7 +42,13 @@ public:
     }
 
     void deleteSurroundingTextImpl(int offset, unsigned int size) override {
-        FCITX_INFO() << "DeleteSurrounding: " << offset << " " << size;
+        const int before = -offset;
+        const int after = offset + static_cast<int>(size);
+        if (before < 0 || after < 0) {
+            FCITX_WARN() << "Invalid deleteSurrounding request: offset=" << offset << ", size=" << size;
+            return;
+        }
+        frontend_->deleteSurrounding(before, after);
     }
 
     void updatePreeditImpl() override {
@@ -202,8 +212,8 @@ void AndroidFrontend::forwardKey(const Key &key, bool isRelease) {
     keyEventCallback(sym, key.states(), Key::keySymToUnicode(sym), isRelease, -1);
 }
 
-void AndroidFrontend::commitString(const std::string &str) {
-    commitStringCallback(str);
+void AndroidFrontend::commitString(const std::string &str, const int cursor) {
+    commitStringCallback(str, cursor);
 }
 
 void AndroidFrontend::updateCandidateList(const std::vector<std::string> &candidates, const int size) {
@@ -296,6 +306,10 @@ std::vector<std::string> AndroidFrontend::getCandidates(const int offset, const 
     return ic->getCandidates(offset, limit);
 }
 
+void AndroidFrontend::deleteSurrounding(const int before, const int after) {
+    deleteSurroundingCallback(before, after);
+}
+
 void AndroidFrontend::showToast(const std::string &s) {
     toastCallback(s);
 }
@@ -333,6 +347,10 @@ void AndroidFrontend::handleStatusAreaUpdate() {
         statusAreaDefer_ = nullptr;
         return true;
     });
+}
+
+void AndroidFrontend::setDeleteSurroundingCallback(const DeleteSurroundingCallback &callback) {
+    deleteSurroundingCallback = callback;
 }
 
 void AndroidFrontend::setToastCallback(const ToastCallback &callback) {
