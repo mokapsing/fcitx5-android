@@ -33,38 +33,43 @@ class TextKeyboard(
             // 日木尸女火金廿大口水
             //  月卜人弓十心的一戈
             //   重田手土止山中
+            /*
+             日木尸廿水 山大弓戈田
+              月女人中火 十的一口
+               重土手卜止 金心
+            */
             listOf(
                 AlphabetKey("Q", "日", "1"),
                 AlphabetKey("W", "木", "2"),
                 AlphabetKey("E", "尸", "3"),
-                AlphabetKey("R", "女", "4"),
-                AlphabetKey("T", "火", "5"),
-                AlphabetKey("Y", "金", "6"),
-                AlphabetKey("U", "廿", "7"),
-                AlphabetKey("I", "大", "8"),
-                AlphabetKey("O", "口", "9"),
-                AlphabetKey("P", "水", "0")
+                AlphabetKey("R", "廿", "4"),
+                AlphabetKey("T", "水", "5"),
+                AlphabetKey("Y", "山", "6"),
+                AlphabetKey("U", "大", "7"),
+                AlphabetKey("I", "弓", "8"),
+                AlphabetKey("O", "戈", "9"),
+                AlphabetKey("P", "田", "0")
             ),
             listOf(
                 AlphabetKey("A", "月", "@"),
-                AlphabetKey("S", "卜", "*"),
+                AlphabetKey("S", "女", "*"),
                 AlphabetKey("D", "人", "+"),
-                AlphabetKey("F", "弓", "-"),
-                AlphabetKey("G", "十", "="),
-                AlphabetKey("H", "心", "/"),
+                AlphabetKey("F", "中", "-"),
+                AlphabetKey("G", "火", "="),
+                AlphabetKey("H", "十", "/"),
                 AlphabetKey("J", "的", "#"),
                 AlphabetKey("K", "一", "("),
-                AlphabetKey("L", "戈", ")")
+                AlphabetKey("L", "口", ")")
             ),
             listOf(
                 CapsKey(),
                 AlphabetKey("Z", "重", "'"),
-                AlphabetKey("X", "田", ":"),
+                AlphabetKey("X", "土", ":"),
                 AlphabetKey("C", "手", "\""),
-                AlphabetKey("V", "土", "?"),
+                AlphabetKey("V", "卜", "?"),
                 AlphabetKey("B", "止", "!"),
-                AlphabetKey("N", "山", "~"),
-                AlphabetKey("M", "中", "\\"),
+                AlphabetKey("N", "金", "~"),
+                AlphabetKey("M", "心", "\\"),
                 BackspaceKey()
             ),
             listOf(
