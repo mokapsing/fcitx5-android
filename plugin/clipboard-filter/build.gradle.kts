@@ -16,7 +16,7 @@ android {
     namespace = "org.fcitx.fcitx5.android.plugin.clipboard_filter"
 
     defaultConfig {
-        applicationId = "org.fcitx.fcitx5.android.plugin.clipboard_filter"
+        applicationId = "com.baidu.input_mi.plugin.clipboard_filter"
     }
 
     buildTypes {
