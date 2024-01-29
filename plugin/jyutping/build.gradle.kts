@@ -13,7 +13,7 @@ android {
     namespace = "org.fcitx.fcitx5.android.plugin.jyutping"
 
     defaultConfig {
-        applicationId = "com.baidu.input_mi.plugin.jyutping"
+        applicationId = "com.iflytek.inputmethod.miui.plugin.jyutping"
 
         externalNativeBuild {
             cmake {

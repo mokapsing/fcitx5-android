@@ -13,7 +13,7 @@ android {
     namespace = "org.fcitx.fcitx5.android.plugin.anthy"
 
     defaultConfig {
-        applicationId = "com.baidu.input_mi.plugin.anthy"
+        applicationId = "com.iflytek.inputmethod.miui.plugin.anthy"
 
         externalNativeBuild {
             cmake {

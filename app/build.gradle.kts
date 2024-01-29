@@ -15,7 +15,7 @@ android {
     namespace = "org.fcitx.fcitx5.android"
 
     defaultConfig {
-        applicationId = "com.baidu.input_mi"
+        applicationId = "com.iflytek.inputmethod.miui"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         externalNativeBuild {

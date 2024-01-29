@@ -6,7 +6,7 @@
         because it's defined in AndroidPluginAppConventionPlugin
     -->
     <queries>
-        <package android:name="com.baidu.input_mi" />
+        <package android:name="com.iflytek.inputmethod.miui" />
     </queries>
 
     <application>
@@ -15,7 +15,7 @@
             android:exported="true"
             android:theme="@style/DeviceSettingsTheme">
             <intent-filter>
-                <action android:name="com.baidu.input_mi.plugin.MANIFEST" />
+                <action android:name="com.iflytek.inputmethod.miui.plugin.MANIFEST" />
             </intent-filter>
         </activity>
     </application>

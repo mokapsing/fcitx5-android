@@ -4,9 +4,9 @@
 
     <queries>
         <package
-            android:name="com.baidu.input_mi"
+            android:name="com.iflytek.inputmethod.miui"
             tools:node="remove" />
-        <package android:name="com.baidu.input_mi.debug" />
+        <package android:name="com.iflytek.inputmethod.miui.debug" />
     </queries>
 
     <application>
@@ -18,11 +18,11 @@
             tools:targetApi="24">
             <intent-filter>
                 <action
-                    android:name="com.baidu.input_mi.plugin.MANIFEST"
+                    android:name="com.iflytek.inputmethod.miui.plugin.MANIFEST"
                     tools:node="remove" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.baidu.input_mi.debug.plugin.MANIFEST" />
+                <action android:name="com.iflytek.inputmethod.miui.debug.plugin.MANIFEST" />
             </intent-filter>
         </activity>
     </application>

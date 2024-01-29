@@ -18,18 +18,18 @@ class AndroidPluginAppConventionPlugin : Plugin<Project> {
         target.extensions.configure<BaseAppModuleExtension> {
             buildTypes {
                 release {
-                    buildConfigField("String", "MAIN_APPLICATION_ID", "\"com.baidu.input_mi\"")
+                    buildConfigField("String", "MAIN_APPLICATION_ID", "\"com.iflytek.inputmethod.miui\"")
                     addManifestPlaceholders(
                         mapOf(
-                            "mainApplicationId" to "com.baidu.input_mi",
+                            "mainApplicationId" to "com.iflytek.inputmethod.miui",
                         )
                     )
                 }
                 debug {
-                    buildConfigField("String", "MAIN_APPLICATION_ID", "\"com.baidu.input_mi.debug\"")
+                    buildConfigField("String", "MAIN_APPLICATION_ID", "\"com.iflytek.inputmethod.miui.debug\"")
                     addManifestPlaceholders(
                         mapOf(
-                            "mainApplicationId" to "com.baidu.input_mi.debug",
+                            "mainApplicationId" to "com.iflytek.inputmethod.miui.debug",
                         )
                     )
                 }

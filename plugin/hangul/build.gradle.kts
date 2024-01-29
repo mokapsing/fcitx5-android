@@ -13,7 +13,7 @@ android {
     namespace = "org.fcitx.fcitx5.android.plugin.hangul"
 
     defaultConfig {
-        applicationId = "com.baidu.input_mi.plugin.hangul"
+        applicationId = "com.iflytek.inputmethod.miui.plugin.hangul"
 
         externalNativeBuild {
             cmake {

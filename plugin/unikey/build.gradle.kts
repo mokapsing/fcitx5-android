@@ -13,7 +13,7 @@ android {
     namespace = "org.fcitx.fcitx5.android.plugin.unikey"
 
     defaultConfig {
-        applicationId = "com.baidu.input_mi.plugin.unikey"
+        applicationId = "com.iflytek.inputmethod.miui.plugin.unikey"
 
         externalNativeBuild {
             cmake {

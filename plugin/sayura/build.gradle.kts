@@ -13,7 +13,7 @@ android {
     namespace = "org.fcitx.fcitx5.android.plugin.sayura"
 
     defaultConfig {
-        applicationId = "com.baidu.input_mi.plugin.sayura"
+        applicationId = "com.iflytek.inputmethod.miui.plugin.sayura"
 
         externalNativeBuild {
             cmake {

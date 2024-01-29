@@ -13,7 +13,7 @@ android {
     namespace = "org.fcitx.fcitx5.android.plugin.rime"
 
     defaultConfig {
-        applicationId = "com.baidu.input_mi.plugin.rime"
+        applicationId = "com.iflytek.inputmethod.miui.plugin.rime"
 
         externalNativeBuild {
             cmake {
