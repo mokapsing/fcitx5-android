@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name_release">Fcitx5 для Android ()</string>
-    <string name="app_name_debug">Fcitx5 для Android ( отладка)</string>
+    <string name="app_name_release">Fcitx5 для Xiaomi</string>
+    <string name="app_name_debug">Fcitx5 для Xiaomi (отладка)</string>
     <string name="save">Сохранить</string>
     <string name="input_methods">Методы ввода</string>
     <string name="add_input_method">Добавить метод ввода</string>
@@ -52,7 +52,7 @@
     <string name="expanded_candidate_style_flexbox">Flexbox</string>
     <string name="no_more_input_methods">Методов ввода для переключения больше нет</string>
     <string name="add_more_input_methods">Хотите добавить больше методов ввода?</string>
-    <string name="about">О fcitx5 для Android</string>
+    <string name="about">О Fcitx5 для Xiaomi</string>
     <string name="faq">FAQ</string>
     <string name="current_version">Текущая версия</string>
     <string name="real_time_logs">Журналы в реальном времени</string>
