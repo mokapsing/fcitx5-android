@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.baidu.input_mi.ui.main.log.LogView
+    <org.fcitx.fcitx5.android.ui.main.log.LogView
         android:id="@+id/logView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
