@@ -4,9 +4,9 @@
 
     <queries>
         <package
-            android:name="com.baidu.input_mi"
+            android:name="org.fcitx.fcitx5.android"
             tools:node="remove" />
-        <package android:name="com.baidu.input_mi.debug" />
+        <package android:name="org.fcitx.fcitx5.android.debug" />
     </queries>
 
     <application>
@@ -18,11 +18,11 @@
             tools:targetApi="24">
             <intent-filter>
                 <action
-                    android:name="com.baidu.input_mi.plugin.MANIFEST"
+                    android:name="org.fcitx.fcitx5.android.plugin.MANIFEST"
                     tools:node="remove" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.baidu.input_mi.debug.plugin.MANIFEST" />
+                <action android:name="org.fcitx.fcitx5.android.debug.plugin.MANIFEST" />
             </intent-filter>
         </activity>
     </application>
