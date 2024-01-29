@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.MainFragment"
+        android:name="com.baidu.input_mi.ui.main.MainFragment"
         android:label="@string/app_name">
         <action
             android:id="@+id/action_mainFragment_to_globalConfigFragment"
@@ -96,7 +96,7 @@
 
     <fragment
         android:id="@+id/globalConfigFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.global.GlobalConfigFragment">
+        android:name="com.baidu.input_mi.ui.main.settings.global.GlobalConfigFragment">
         <action
             android:id="@+id/action_globalConfigFragment_to_listFragment"
             app:destination="@id/listFragment"
@@ -108,7 +108,7 @@
 
     <fragment
         android:id="@+id/imListFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.im.InputMethodListFragment"
+        android:name="com.baidu.input_mi.ui.main.settings.im.InputMethodListFragment"
         android:label="@string/input_methods_conf">
         <action
             android:id="@+id/action_imListFragment_to_imConfigFragment"
@@ -120,7 +120,7 @@
     </fragment>
     <fragment
         android:id="@+id/imConfigFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.im.InputMethodConfigFragment">
+        android:name="com.baidu.input_mi.ui.main.settings.im.InputMethodConfigFragment">
         <action
             android:id="@+id/action_imConfigFragment_to_listFragment"
             app:destination="@id/listFragment"
@@ -167,7 +167,7 @@
 
     <fragment
         android:id="@+id/addonListFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.addon.AddonListFragment"
+        android:name="com.baidu.input_mi.ui.main.settings.addon.AddonListFragment"
         android:label="@string/addons_conf">
         <action
             android:id="@+id/action_addonListFragment_to_addonConfigFragment"
@@ -179,7 +179,7 @@
     </fragment>
     <fragment
         android:id="@+id/addonConfigFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.addon.AddonConfigFragment">
+        android:name="com.baidu.input_mi.ui.main.settings.addon.AddonConfigFragment">
         <action
             android:id="@+id/action_addonConfigFragment_to_listFragment"
             app:destination="@id/listFragment"
@@ -233,39 +233,39 @@
 
     <fragment
         android:id="@+id/keyboardSettingsFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.behavior.KeyboardSettingsFragment"
+        android:name="com.baidu.input_mi.ui.main.settings.behavior.KeyboardSettingsFragment"
         android:label="@string/keyboard" />
     <fragment
         android:id="@+id/clipboardSettingsFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.behavior.ClipboardSettingsFragment"
+        android:name="com.baidu.input_mi.ui.main.settings.behavior.ClipboardSettingsFragment"
         android:label="@string/clipboard" />
     <fragment
         android:id="@+id/advancedSettingsFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.behavior.AdvancedSettingsFragment"
+        android:name="com.baidu.input_mi.ui.main.settings.behavior.AdvancedSettingsFragment"
         android:label="@string/advanced" />
     <fragment
         android:id="@+id/themeFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.theme.ThemeFragment"
+        android:name="com.baidu.input_mi.ui.main.settings.theme.ThemeFragment"
         android:label="@string/theme">
     </fragment>
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.ListFragment" />
+        android:name="com.baidu.input_mi.ui.main.settings.ListFragment" />
     <fragment
         android:id="@+id/pinyinDictionaryFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.PinyinDictionaryFragment"
+        android:name="com.baidu.input_mi.ui.main.settings.PinyinDictionaryFragment"
         android:label="@string/pinyin_dict" />
     <fragment
         android:id="@+id/punctuationEditorFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.PunctuationEditorFragment" />
+        android:name="com.baidu.input_mi.ui.main.settings.PunctuationEditorFragment" />
     <fragment
         android:id="@+id/developerFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.DeveloperFragment"
+        android:name="com.baidu.input_mi.ui.main.DeveloperFragment"
         android:label="@string/developer" />
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.AboutFragment"
+        android:name="com.baidu.input_mi.ui.main.AboutFragment"
         android:label="@string/about">
         <action
             android:id="@+id/action_aboutFragment_to_licensesFragment"
@@ -277,11 +277,11 @@
     </fragment>
     <fragment
         android:id="@+id/licensesFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.LicensesFragment"
+        android:name="com.baidu.input_mi.ui.main.LicensesFragment"
         android:label="@string/open_source_licenses" />
     <fragment
         android:id="@+id/quickPhraseListFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.QuickPhraseListFragment"
+        android:name="com.baidu.input_mi.ui.main.settings.QuickPhraseListFragment"
         android:label="@string/quickphrase_editor">
         <action
             android:id="@+id/action_quickPhraseListFragment_to_quickPhraseEditFragment"
@@ -293,16 +293,16 @@
     </fragment>
     <fragment
         android:id="@+id/quickPhraseEditFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.QuickPhraseEditFragment" />
+        android:name="com.baidu.input_mi.ui.main.settings.QuickPhraseEditFragment" />
     <fragment
         android:id="@+id/tableInputMethodFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.TableInputMethodFragment"
+        android:name="com.baidu.input_mi.ui.main.settings.TableInputMethodFragment"
         android:label="@string/table_im" />
     <fragment
         android:id="@+id/pluginFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.PluginFragment"
+        android:name="com.baidu.input_mi.ui.main.PluginFragment"
         android:label="@string/plugins" />
     <fragment
         android:id="@+id/pinyinCustomPhraseFragment"
-        android:name="org.fcitx.fcitx5.android.ui.main.settings.PinyinCustomPhraseFragment" />
+        android:name="com.baidu.input_mi.ui.main.settings.PinyinCustomPhraseFragment" />
 </navigation>
