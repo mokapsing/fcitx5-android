@@ -19,6 +19,7 @@ open class KeyDef(
         val border: Border,
         val margin: Boolean,
         val viewId: Int,
+        val radiusAdj: Int,
         val soundEffect: InputFeedbacks.SoundEffect
     ) {
         enum class Variant {
@@ -43,8 +44,9 @@ open class KeyDef(
             border: Border = Border.Default,
             margin: Boolean = true,
             viewId: Int = -1,
+            radiusAdj: Int = 0,
             soundEffect: InputFeedbacks.SoundEffect = InputFeedbacks.SoundEffect.Standard
-        ) : Appearance(percentWidth, variant, border, margin, viewId, soundEffect)
+        ) : Appearance(percentWidth, variant, border, margin, viewId, radiusAdj, soundEffect)
 
         class AltText(
             keyCodeString: String,
@@ -61,7 +63,8 @@ open class KeyDef(
             border: Border = Border.Default,
             margin: Boolean = true,
             viewId: Int = -1,
-        ) : Text(keyCodeString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId)
+            radiusAdj: Int = 0,
+        ) : Text(keyCodeString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId, radiusAdj)
 
         class Image(
             @DrawableRes
@@ -71,8 +74,9 @@ open class KeyDef(
             border: Border = Border.Default,
             margin: Boolean = true,
             viewId: Int = -1,
+            radiusAdj: Int = 0,
             soundEffect: InputFeedbacks.SoundEffect = InputFeedbacks.SoundEffect.Standard
-        ) : Appearance(percentWidth, variant, border, margin, viewId, soundEffect)
+        ) : Appearance(percentWidth, variant, border, margin, viewId, radiusAdj, soundEffect)
 
         class ImageText(
             keyCodeString: String,
@@ -89,8 +93,9 @@ open class KeyDef(
             variant: Variant = Variant.Normal,
             border: Border = Border.Default,
             margin: Boolean = true,
-            viewId: Int = -1
-        ) : Text(keyCodeString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId)
+            viewId: Int = -1,
+            radiusAdj: Int = 0,
+        ) : Text(keyCodeString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId, radiusAdj)
     }
 
     sealed class Behavior {
