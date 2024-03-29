@@ -6,6 +6,7 @@ package org.fcitx.fcitx5.android.input.preedit
 
 import android.content.Context
 import android.graphics.Paint
+import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import android.text.Spanned
@@ -51,7 +52,17 @@ class PreeditUi(override val ctx: Context, private val theme: Theme) : Ui {
     }
 
     private fun createTextView() = textView {
-        backgroundColor = barBackground
+        //backgroundColor = barBackground
+        val barRadius = dp(ThemeManager.prefs.keyRadius.getValue().toFloat())
+        background = GradientDrawable().apply {
+             setColor(barBackground)
+             cornerRadii = floatArrayOf(
+                 barRadius, barRadius, // 左上角
+                 barRadius, barRadius, // 右上角
+                 barRadius, barRadius, // 右下角
+                 barRadius, barRadius  // 左下角
+             )
+        }
         horizontalPadding = dp(8)
         setTextColor(theme.keyTextColor)
         textSize = 26f
