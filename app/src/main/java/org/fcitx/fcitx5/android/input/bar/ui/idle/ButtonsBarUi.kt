@@ -24,9 +24,11 @@ class ButtonsBarUi(override val ctx: Context, private val theme: Theme) : Ui {
     }
 
     private fun toolButton(@DrawableRes icon: Int) = ToolButton(ctx, icon, theme).also {
-        val size = ctx.dp(40)
+        val size = ctx.dp(33)
         root.addView(it, FlexboxLayout.LayoutParams(size, size))
     }
+
+    val rimeAsciiButton = toolButton(R.drawable.ic_clipboard)
 
     val undoButton = toolButton(R.drawable.ic_baseline_undo_24)
 

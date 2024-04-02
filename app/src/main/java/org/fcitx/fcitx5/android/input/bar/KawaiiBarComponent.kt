@@ -202,6 +202,13 @@ class KawaiiBarComponent : UniqueViewComponent<KawaiiBarComponent, FrameLayout>(
             }
             hideKeyboardButton.setOnClickListener(hideKeyboardCallback)
             buttonsUi.apply {
+                rimeAsciiButton.setOnClickListener {
+                    service.postFcitxJob{
+                        statusArea().firstOrNull { it.name == "fcitx-rime-im" }?.let {
+                            it.menu?.firstOrNull()?.let { (id) -> activateAction(id) }
+                        }
+                    }
+                }
                 undoButton.setOnClickListener {
                     service.sendCombinationKeyEvents(KeyEvent.KEYCODE_Z, ctrl = true)
                 }
