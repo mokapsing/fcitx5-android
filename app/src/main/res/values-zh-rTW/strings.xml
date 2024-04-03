@@ -200,6 +200,7 @@
     <string name="space_behavior_enumerate">輪換輸入法</string>
     <string name="space_behavior_activate">在目前輸入法與第一個輸入法之間切換</string>
     <string name="space_behavior_picker">顯示選擇輸入法對話框</string>
+    <string name="space_behavior_simulate_shift">模拟发送实体shift键</string>
     <string name="show_lang_switch_key">顯示語言切換鍵</string>
     <string name="horizontal_candidate_style">橫向候選詞樣式</string>
     <string name="horizontal_candidate_never_fill">從不填充寬度</string>
@@ -254,4 +255,5 @@
     <string name="table_dict_replace_message">碼表字典 \"%1$s\" 已存在。您可以匯入新字典並覆蓋原字典。</string>
     <string name="lang_switch_key_behavior">語言切換鍵行為</string>
     <string name="lang_switch_behavior_next_ime_app">切換至下一個輸入法</string>
+    <string name="lang_switch_behavior_simulate_shift">模拟发送实体shift键</string>
 </resources>

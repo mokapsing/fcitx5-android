@@ -86,6 +86,7 @@ class Fcitx(private val context: Context) : FcitxAPI, FcitxLifecycleOwner {
         withFcitxContext { sendKeySymToFcitx(sym.sym, states.toInt(), up, timestamp) }
 
     override suspend fun select(idx: Int): Boolean = withFcitxContext { selectCandidate(idx) }
+    override suspend fun simulateShift(): Boolean = withFcitxContext { sendHardShift() }
     override suspend fun isEmpty(): Boolean = withFcitxContext { isInputPanelEmpty() }
     override suspend fun reset() = withFcitxContext { resetInputContext() }
     override suspend fun moveCursor(position: Int) = withFcitxContext { repositionCursor(position) }
@@ -236,6 +237,9 @@ class Fcitx(private val context: Context) : FcitxAPI, FcitxLifecycleOwner {
 
         @JvmStatic
         external fun selectCandidate(idx: Int): Boolean
+
+        @JvmStatic
+        external fun sendHardShift(): Boolean
 
         @JvmStatic
         external fun isInputPanelEmpty(): Boolean

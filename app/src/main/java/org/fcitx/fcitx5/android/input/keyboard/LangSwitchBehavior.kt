@@ -9,7 +9,8 @@ import org.fcitx.fcitx5.android.data.prefs.ManagedPreference
 enum class LangSwitchBehavior {
     Enumerate,
     ToggleActivate,
-    NextInputMethodApp;
+    NextInputMethodApp,
+    SimulateShiftKey;
 
     companion object : ManagedPreference.StringLikeCodec<LangSwitchBehavior> {
         override fun decode(raw: String): LangSwitchBehavior = valueOf(raw)

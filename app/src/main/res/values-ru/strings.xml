@@ -200,6 +200,7 @@
     <string name="space_behavior_enumerate">Перечислить методы ввода</string>
     <string name="space_behavior_activate">Переключить состояние активации метода ввода</string>
     <string name="space_behavior_picker">Показать диалоговое окно выбора метода ввода</string>
+    <string name="space_behavior_simulate_shift">Аналоговая клавиша сдвига посылаемого объекта</string>
     <string name="show_lang_switch_key">Показываать клавишу переключения языка</string>
     <string name="horizontal_candidate_style">Горизонтальный стиль кандидата</string>
     <string name="horizontal_candidate_never_fill">Никогда не заполнять ширину</string>
@@ -254,4 +255,5 @@
     <string name="table_dict_replace_message">Словарь кодовой таблицы \"%1$s\" существует. Вы можете импортировать новый словарь и заменить его.</string>
     <string name="lang_switch_key_behavior">Поведение клавиши переключения языка </string>
     <string name="lang_switch_behavior_next_ime_app">Переключиться на следующий метод ввода</string>
+    <string name="lang_switch_behavior_simulate_shift">Аналоговая клавиша сдвига посылаемого объекта</string>
 </resources>

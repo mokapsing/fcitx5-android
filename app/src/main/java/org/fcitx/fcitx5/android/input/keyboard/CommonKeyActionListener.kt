@@ -130,6 +130,11 @@ class CommonKeyActionListener :
                         LangSwitchBehavior.NextInputMethodApp -> {
                             service.nextInputMethodApp()
                         }
+                        LangSwitchBehavior.SimulateShiftKey -> {
+                            service.postFcitxJob {
+                                simulateShift()
+                            }
+                        }
                     }
                 }
                 is ShowInputMethodPickerAction -> showInputMethodPicker()
@@ -181,6 +186,10 @@ class CommonKeyActionListener :
                             toggleIme()
                         }
                         SpaceLongPressBehavior.ShowPicker -> showInputMethodPicker()
+
+                        SpaceLongPressBehavior.SimulateShiftKey -> service.postFcitxJob {
+                            simulateShift()
+                        }
                     }
                 }
                 else -> {}

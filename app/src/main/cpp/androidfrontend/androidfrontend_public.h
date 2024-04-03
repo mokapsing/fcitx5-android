@@ -81,5 +81,7 @@ FCITX_ADDON_DECLARE_FUNCTION(AndroidFrontend, setDeleteSurroundingCallback,
 
 FCITX_ADDON_DECLARE_FUNCTION(AndroidFrontend, setToastCallback,
                              void(const ToastCallback &))
+FCITX_ADDON_DECLARE_FUNCTION(AndroidFrontend, sendHardShift,
+                             bool())
 
 #endif // _FCITX5_ANDROID_ANDROIDFRONTEND_PUBLIC_H_

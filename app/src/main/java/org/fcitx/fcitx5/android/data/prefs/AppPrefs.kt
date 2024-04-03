@@ -186,13 +186,15 @@ class AppPrefs(private val sharedPreferences: SharedPreferences) {
                 SpaceLongPressBehavior.None,
                 SpaceLongPressBehavior.Enumerate,
                 SpaceLongPressBehavior.ToggleActivate,
-                SpaceLongPressBehavior.ShowPicker
+                SpaceLongPressBehavior.ShowPicker,
+                SpaceLongPressBehavior.SimulateShiftKey
             ),
             listOf(
                 R.string.space_behavior_none,
                 R.string.space_behavior_enumerate,
                 R.string.space_behavior_activate,
-                R.string.space_behavior_picker
+                R.string.space_behavior_picker,
+                R.string.space_behavior_simulate_shift
             )
         )
         val showLangSwitchKey =
@@ -205,12 +207,14 @@ class AppPrefs(private val sharedPreferences: SharedPreferences) {
             listOf(
                 LangSwitchBehavior.Enumerate,
                 LangSwitchBehavior.ToggleActivate,
-                LangSwitchBehavior.NextInputMethodApp
+                LangSwitchBehavior.NextInputMethodApp,
+                LangSwitchBehavior.SimulateShiftKey
             ),
             listOf(
                 R.string.space_behavior_enumerate,
                 R.string.space_behavior_activate,
-                R.string.lang_switch_behavior_next_ime_app
+                R.string.lang_switch_behavior_next_ime_app,
+                R.string.lang_switch_behavior_simulate_shift
             )
         ) { showLangSwitchKey.getValue() }
 
