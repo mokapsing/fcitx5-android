@@ -10,7 +10,9 @@ enum class LangSwitchBehavior {
     Enumerate,
     ToggleActivate,
     NextInputMethodApp,
-    SimulateShiftKey;
+    SimulateShiftKey,
+    ToggleRimeAscii,
+    SwitchRimeSchema;
 
     companion object : ManagedPreference.StringLikeCodec<LangSwitchBehavior> {
         override fun decode(raw: String): LangSwitchBehavior = valueOf(raw)

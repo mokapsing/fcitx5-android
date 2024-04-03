@@ -11,7 +11,9 @@ enum class SpaceLongPressBehavior {
     Enumerate,
     ToggleActivate,
     ShowPicker,
-    SimulateShiftKey;
+    SimulateShiftKey,
+    ToggleRimeAscii,
+    SwitchRimeSchema;
 
     companion object : ManagedPreference.StringLikeCodec<SpaceLongPressBehavior> {
         override fun decode(raw: String): SpaceLongPressBehavior = valueOf(raw)
