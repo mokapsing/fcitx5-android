@@ -52,6 +52,7 @@ public:
     void setDeleteSurroundingCallback(const DeleteSurroundingCallback &callback);
     void setToastCallback(const ToastCallback &callback);
     bool sendHardShift();
+    bool forgetCandidate(int idx);
 
 private:
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, keyEvent);
@@ -76,6 +77,7 @@ private:
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, setDeleteSurroundingCallback);
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, setToastCallback);
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, sendHardShift);
+    FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, forgetCandidate);
 
     Instance *instance_;
     FocusGroup focusGroup_;

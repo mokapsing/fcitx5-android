@@ -230,10 +230,6 @@ bool AndroidFrontend::selectCandidate(int idx) {
 
 bool AndroidFrontend::sendHardShift() {
     if (!activeIC_) return false;
-    // check current IME engine, currently only support pinyin
-    //auto currentIm = instance_->currentInputMethod();
-    //if (currentIm != "pinyin" && currentIm != "shuangpin") return false;
-    // Ctrl+7 to activate forget candidate mode
     auto keyDown = Key(FcitxKey_Shift_L, Flags<KeyState>(KeyState::Shift));
     KeyEvent keyEvent(activeIC_, keyDown, false);
     activeIC_->keyEvent(keyEvent);
@@ -242,6 +238,28 @@ bool AndroidFrontend::sendHardShift() {
     activeIC_->keyEvent(keyEvent);
 
     return true;
+}
+
+bool AndroidFrontend::forgetCandidate(int idx) {
+    if (!activeIC_) return false;
+    // check current engine, only pinyin and table engine support deleting words
+    auto *entry = instance_->inputMethodEntry(activeIC_);
+    if (entry->addon() != "pinyin" && entry->addon() != "table") return false;
+    // do we have candidate list?
+    auto list = activeIC_->inputPanel().candidateList();
+    if (!list) return false;
+    // Ctrl+7 to activate forget candidate mode
+    Key key(FcitxKey_7, Flags<KeyState>(KeyState::Ctrl));
+    KeyEvent pressEvent(activeIC_, key, false);
+    auto handled = activeIC_->keyEvent(pressEvent);
+    if (handled) {
+        KeyEvent releaseEvent(activeIC_, key, true);
+        activeIC_->keyEvent(releaseEvent);
+    } else {
+        // something went wrong
+        return false;
+    }
+    return activeIC_->selectCandidate(idx);
 }
 
 bool AndroidFrontend::isInputPanelEmpty() {

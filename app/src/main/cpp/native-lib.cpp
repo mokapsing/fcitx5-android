@@ -123,6 +123,9 @@ public:
     bool sendHardShift() {
         return p_frontend->call<fcitx::IAndroidFrontend::sendHardShift>();
     }
+    bool forgetCandidate(int idx) {
+        return p_frontend->call<fcitx::IAndroidFrontend::forgetCandidate>(idx);
+    }
 
     bool isInputPanelEmpty() {
         return p_frontend->call<fcitx::IAndroidFrontend::isInputPanelEmpty>();
@@ -763,6 +766,14 @@ Java_org_fcitx_fcitx5_android_core_Fcitx_sendHardShift(JNIEnv *env, jclass clazz
     RETURN_VALUE_IF_NOT_RUNNING(false)
     FCITX_DEBUG() << "sendHardShift";
     return Fcitx::Instance().sendHardShift();
+}
+
+extern "C"
+JNIEXPORT jboolean JNICALL
+Java_org_fcitx_fcitx5_android_core_Fcitx_forgetCandidate(JNIEnv *env, jclass clazz, jint idx) {
+    RETURN_VALUE_IF_NOT_RUNNING(false)
+    FCITX_DEBUG() << "forgetCandidate: #" << idx;
+    return Fcitx::Instance().forgetCandidate(idx);
 }
 
 extern "C"

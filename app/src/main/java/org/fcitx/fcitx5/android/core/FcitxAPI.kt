@@ -53,6 +53,7 @@ interface FcitxAPI {
 
     suspend fun select(idx: Int): Boolean
     suspend fun simulateShift(): Boolean
+    suspend fun forget(idx: Int): Boolean
     suspend fun isEmpty(): Boolean
     suspend fun reset()
     suspend fun moveCursor(position: Int)

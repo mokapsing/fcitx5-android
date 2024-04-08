@@ -84,4 +84,7 @@ FCITX_ADDON_DECLARE_FUNCTION(AndroidFrontend, setToastCallback,
 FCITX_ADDON_DECLARE_FUNCTION(AndroidFrontend, sendHardShift,
                              bool())
 
+FCITX_ADDON_DECLARE_FUNCTION(AndroidFrontend, forgetCandidate,
+                             bool(int idx))
+
 #endif // _FCITX5_ANDROID_ANDROIDFRONTEND_PUBLIC_H_
