@@ -151,12 +151,12 @@ class TextKeyboard(
         punctuationMapping = mapping
         updatePunctuationKeys()
     }
-    private val labelNeedIme: String = "中州韵 (魔仓)"
+    private val labelNeedIme: String = "ㄓ 魔仓"
     private var curImeName: String = "English"
     override fun onInputMethodUpdate(ime: InputMethodEntry) {
         val spaceLable = buildString {
             append(ime.displayName)
-            ime.subMode.run { name.ifEmpty { label.ifEmpty { null } } }?.let { append(" ($it)") }
+            ime.subMode.run { name.ifEmpty { label.ifEmpty { null } } }?.let { append(" $it") }
         }
         space.mainText.text = spaceLable
         curImeName = spaceLable
