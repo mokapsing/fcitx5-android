@@ -180,7 +180,7 @@ class AppPrefs(private val sharedPreferences: SharedPreferences) {
         val spaceKeyLongPressBehavior = list(
             R.string.space_long_press_behavior,
             "space_long_press_behavior",
-            SpaceLongPressBehavior.None,
+            SpaceLongPressBehavior.ToggleRimeAscii,
             SpaceLongPressBehavior,
             listOf(
                 SpaceLongPressBehavior.None,
@@ -208,7 +208,7 @@ class AppPrefs(private val sharedPreferences: SharedPreferences) {
         val langSwitchKeyBehavior = list(
             R.string.lang_switch_key_behavior,
             "lang_switch_key_behavior",
-            LangSwitchBehavior.Enumerate,
+            LangSwitchBehavior.SwitchRimeSchema,
             LangSwitchBehavior,
             listOf(
                 LangSwitchBehavior.Enumerate,
