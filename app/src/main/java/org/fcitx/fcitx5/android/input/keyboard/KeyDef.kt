@@ -19,7 +19,7 @@ open class KeyDef(
         val border: Border,
         val margin: Boolean,
         val viewId: Int,
-        val radiusAdj: Int,
+        val radiusAdj: Boolean,
         val soundEffect: InputFeedbacks.SoundEffect
     ) {
         enum class Variant {
@@ -44,7 +44,7 @@ open class KeyDef(
             border: Border = Border.Default,
             margin: Boolean = true,
             viewId: Int = -1,
-            radiusAdj: Int = 0,
+            radiusAdj: Boolean = false,
             soundEffect: InputFeedbacks.SoundEffect = InputFeedbacks.SoundEffect.Standard
         ) : Appearance(percentWidth, variant, border, margin, viewId, radiusAdj, soundEffect)
 
@@ -63,7 +63,7 @@ open class KeyDef(
             border: Border = Border.Default,
             margin: Boolean = true,
             viewId: Int = -1,
-            radiusAdj: Int = 0,
+            radiusAdj: Boolean = false,
         ) : Text(keyCodeString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId, radiusAdj)
 
         class Image(
@@ -74,7 +74,7 @@ open class KeyDef(
             border: Border = Border.Default,
             margin: Boolean = true,
             viewId: Int = -1,
-            radiusAdj: Int = 0,
+            radiusAdj: Boolean = false,
             soundEffect: InputFeedbacks.SoundEffect = InputFeedbacks.SoundEffect.Standard
         ) : Appearance(percentWidth, variant, border, margin, viewId, radiusAdj, soundEffect)
 
@@ -94,7 +94,7 @@ open class KeyDef(
             border: Border = Border.Default,
             margin: Boolean = true,
             viewId: Int = -1,
-            radiusAdj: Int = 0,
+            radiusAdj: Boolean = false,
         ) : Text(keyCodeString, displayText, textSize, textStyle, percentWidth, variant, border, margin, viewId, radiusAdj)
     }
 
