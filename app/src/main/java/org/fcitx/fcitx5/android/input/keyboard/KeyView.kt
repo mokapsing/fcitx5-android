@@ -276,7 +276,7 @@ open class TextKeyView(ctx: Context, theme: Theme, def: KeyDef.Appearance.Text) 
         isClickable = false
         isFocusable = false
         background = null
-        text = def.displayText
+        text = def.displayText.ifEmpty { def.keyCodeString }
         setTextSize(TypedValue.COMPLEX_UNIT_DIP, def.textSize)
         textDirection = View.TEXT_DIRECTION_FIRST_STRONG_LTR
         // keep original typeface, apply textStyle only

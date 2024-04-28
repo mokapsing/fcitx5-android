@@ -225,7 +225,7 @@ class TextKeyboard(
                     if (keepLettersUppercase) str.uppercase() else transformAlphabet(str)
                 }
             } else {
-                it.mainText.text = it.def.displayText
+                it.mainText.text = it.def.displayText.ifEmpty { it.def.keyCodeString }
             }
         }
     }
