@@ -87,7 +87,6 @@ class Fcitx(private val context: Context) : FcitxAPI, FcitxLifecycleOwner {
 
     override suspend fun select(idx: Int): Boolean = withFcitxContext { selectCandidate(idx) }
     override suspend fun simulateShift(): Boolean = withFcitxContext { sendHardShift() }
-    override suspend fun forget(idx: Int): Boolean = withFcitxContext { forgetCandidate(idx) }
     override suspend fun isEmpty(): Boolean = withFcitxContext { isInputPanelEmpty() }
     override suspend fun reset() = withFcitxContext { resetInputContext() }
     override suspend fun moveCursor(position: Int) = withFcitxContext { repositionCursor(position) }
@@ -165,6 +164,12 @@ class Fcitx(private val context: Context) : FcitxAPI, FcitxLifecycleOwner {
     override suspend fun getCandidates(offset: Int, limit: Int): Array<String> =
         withFcitxContext { getFcitxCandidates(offset, limit) ?: emptyArray() }
 
+    override suspend fun getCandidateActions(idx: Int): Array<CandidateAction> =
+        withFcitxContext { getFcitxCandidateActions(idx) ?: emptyArray() }
+
+    override suspend fun triggerCandidateAction(idx: Int, actionIdx: Int) =
+        withFcitxContext { triggerFcitxCandidateAction(idx, actionIdx) }
+
     init {
         if (lifecycle.currentState != FcitxLifecycle.State.STOPPED)
             throw IllegalAccessException("Fcitx5 has already been created!")
@@ -241,9 +246,6 @@ class Fcitx(private val context: Context) : FcitxAPI, FcitxLifecycleOwner {
 
         @JvmStatic
         external fun sendHardShift(): Boolean
-
-        @JvmStatic
-	external fun forgetCandidate(idx: Int): Boolean
 
         @JvmStatic
         external fun isInputPanelEmpty(): Boolean
@@ -334,6 +336,12 @@ class Fcitx(private val context: Context) : FcitxAPI, FcitxLifecycleOwner {
 
         @JvmStatic
         external fun getFcitxCandidates(offset: Int, limit: Int): Array<String>?
+
+        @JvmStatic
+        external fun getFcitxCandidateActions(idx: Int): Array<CandidateAction>?
+
+        @JvmStatic
+        external fun triggerFcitxCandidateAction(idx: Int, actionIdx: Int)
 
         @JvmStatic
         external fun loopOnce()

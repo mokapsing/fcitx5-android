@@ -40,6 +40,8 @@ public:
     InputContext *activeInputContext() const;
     void setCapabilityFlags(uint64_t flag);
     std::vector<std::string> getCandidates(const int offset, const int limit);
+    std::vector<CandidateAction> getCandidateActions(const int idx);
+    void triggerCandidateAction(const int idx, const int actionIdx);
     void deleteSurrounding(const int before, const int after);
     void showToast(const std::string &s);
     void setCandidateListCallback(const CandidateListCallback &callback);
@@ -52,7 +54,6 @@ public:
     void setDeleteSurroundingCallback(const DeleteSurroundingCallback &callback);
     void setToastCallback(const ToastCallback &callback);
     bool sendHardShift();
-    bool forgetCandidate(int idx);
 
 private:
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, keyEvent);
@@ -66,6 +67,8 @@ private:
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, deactivateInputContext);
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, setCapabilityFlags);
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, getCandidates);
+    FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, getCandidateActions);
+    FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, triggerCandidateAction);
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, showToast);
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, setCandidateListCallback);
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, setCommitStringCallback);
@@ -77,7 +80,6 @@ private:
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, setDeleteSurroundingCallback);
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, setToastCallback);
     FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, sendHardShift);
-    FCITX_ADDON_EXPORT_FUNCTION(AndroidFrontend, forgetCandidate);
 
     Instance *instance_;
     FocusGroup focusGroup_;
