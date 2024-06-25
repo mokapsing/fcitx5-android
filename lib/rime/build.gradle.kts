@@ -8,11 +8,9 @@ plugins {
 }
 
 android {
-    namespace = "org.fcitx.fcitx5.android.plugin.rime"
+    namespace = "org.fcitx.fcitx5.android.lib.rime"
 
     defaultConfig {
-        applicationId = "org.fcitx.fcitx5.android.plugin.rime"
-
         @Suppress("UnstableApiUsage")
         externalNativeBuild {
             cmake {
@@ -47,7 +45,7 @@ generateDataDescriptor {
 }
 
 aboutLibraries {
-    configPath = "plugin/rime/licenses"
+    configPath = "lib/rime/licenses"
 }
 
 dependencies {
