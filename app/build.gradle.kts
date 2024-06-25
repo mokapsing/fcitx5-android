@@ -77,6 +77,7 @@ fcitxComponent {
         "fcitx5-lua",
         "libime",
         "fcitx5-chinese-addons"
+        "rime"
     )
 }
 
@@ -90,6 +91,7 @@ dependencies {
     implementation(project(":lib:fcitx5-lua"))
     implementation(project(":lib:libime"))
     implementation(project(":lib:fcitx5-chinese-addons"))
+    implementation(project(":lib:rime"))
     implementation(project(":lib:common"))
     implementation(libs.kotlinx.coroutines)
     implementation(libs.kotlinx.serialization.json)

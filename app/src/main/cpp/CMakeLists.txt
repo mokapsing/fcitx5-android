@@ -23,6 +23,7 @@ find_package(LibIMETable MODULE)
 
 find_package(fcitx5-lua REQUIRED CONFIG)
 find_package(fcitx5-chinese-addons REQUIRED CONFIG)
+find_package(rime REQUIRED CONFIG)
 
 include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
 
@@ -85,5 +86,7 @@ add_custom_target(copy-fcitx5-modules
         COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_PROPERTY:fcitx5-chinese-addons::fullwidth,IMPORTED_LOCATION> ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
         COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_PROPERTY:fcitx5-chinese-addons::pinyinhelper,IMPORTED_LOCATION> ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
         COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_PROPERTY:fcitx5-chinese-addons::punctuation,IMPORTED_LOCATION> ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
+        # Rime_static
+        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_PROPERTY:rime::Rime_static,IMPORTED_LOCATION> ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
         COMMENT "Copying fcitx5 module libraries to :app"
         )
