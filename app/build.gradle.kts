@@ -76,7 +76,7 @@ fcitxComponent {
         "fcitx5",
         "fcitx5-lua",
         "libime",
-        "fcitx5-chinese-addons"
+        "fcitx5-chinese-addons",
         "rime"
     )
 }
