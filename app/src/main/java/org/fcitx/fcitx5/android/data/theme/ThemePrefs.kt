@@ -79,6 +79,9 @@ class ThemePrefs(sharedPreferences: SharedPreferences) :
     val bottomCornerRadiusAdjust =
         int(R.string.bottom_corner_radius_adjust, "bottom_corner_radius_adjust", 20, 0, 48, "dp")
 
+    val clipboardEntryRadius =
+        int(R.string.clipboard_entry_radius, "clipboard_entry_radius", 2, 0, 48, "dp")
+
     enum class PunctuationPosition {
         Bottom,
         TopRight;
