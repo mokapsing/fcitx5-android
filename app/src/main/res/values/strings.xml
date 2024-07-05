@@ -108,6 +108,7 @@
     <string name="brightness">Brightness</string>
     <string name="key_radius">Key radius</string>
     <string name="bottom_corner_radius_adjust">adjus radius for bottom corner keys</string>
+    <string name="text_editing_button_radius">Text editing button radius</string>
     <string name="clipboard_entry_radius">Clipboard entry radius</string>
     <string name="key_horizontal_margin">Key horizontal margin</string>
     <string name="key_vertical_margin">Key vertical margin</string>
