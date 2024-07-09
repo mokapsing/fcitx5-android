@@ -2,8 +2,8 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  * SPDX-FileCopyrightText: Copyright 2021-2023 Fcitx5 for Android Contributors
  */
-#ifndef _FCITX5_ANDROID_ANDROIDFRONTEND_PUBLIC_H_
-#define _FCITX5_ANDROID_ANDROIDFRONTEND_PUBLIC_H_
+#ifndef FCITX5_ANDROID_ANDROIDFRONTEND_PUBLIC_H
+#define FCITX5_ANDROID_ANDROIDFRONTEND_PUBLIC_H
 
 #include <fcitx/text.h>
 #include <fcitx/inputcontext.h>
@@ -91,4 +91,4 @@ FCITX_ADDON_DECLARE_FUNCTION(AndroidFrontend, setToastCallback,
 FCITX_ADDON_DECLARE_FUNCTION(AndroidFrontend, sendHardShift,
                              bool())
 
-#endif // _FCITX5_ANDROID_ANDROIDFRONTEND_PUBLIC_H_
+#endif // FCITX5_ANDROID_ANDROIDFRONTEND_PUBLIC_H
