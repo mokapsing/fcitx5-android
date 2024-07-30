@@ -114,17 +114,11 @@ class TextKeyboard(
     private var punctuationMapping: Map<String, String> = mapOf()
     private fun transformPunctuation(p: String) = punctuationMapping.getOrDefault(p, p)
 
-    private fun transformInputString(c: String): String {
-        if (c.length != 1) return c
-        if (c[0].isLetter()) return transformAlphabet(c)
-        return transformPunctuation(c)
-    }
-
     override fun onAction(action: KeyAction, source: KeyActionListener.Source) {
         var transformed = action
         when (action) {
-            is KeyAction.FcitxKeyAction -> {
-                if (source == KeyActionListener.Source.Keyboard && action.act.length == 1) {
+            is KeyAction.FcitxKeyAction -> when (source) {
+                KeyActionListener.Source.Keyboard -> {
                     when (capsState) {
                         CapsState.None -> {
                             transformed = action.copy(act = action.act.lowercase())
@@ -142,6 +136,11 @@ class TextKeyboard(
                                 states = KeyStates(KeyState.Virtual, KeyState.CapsLock)
                             )
                         }
+                    }
+                }
+                KeyActionListener.Source.Popup -> {
+                    if (capsState == CapsState.Once) {
+                        switchCapsState()
                     }
                 }
             }
@@ -168,6 +167,9 @@ class TextKeyboard(
     private val labelNeedIme: String = "ㄓ 魔仓"
     private var curImeName: String = "English"
     override fun onInputMethodUpdate(ime: InputMethodEntry) {
+        if (capsState != CapsState.None) {
+            switchCapsState()
+        }
         val spaceLable = buildString {
             append(ime.displayName)
             ime.subMode.run { name.ifEmpty { label.ifEmpty { null } } }?.let { append(" $it") }
@@ -177,19 +179,25 @@ class TextKeyboard(
         updateAlphabetKeys()
     }
 
+    private fun transformPopupPreview(c: String): String {
+        if (c.length != 1) return c
+        if (c[0].isLetter()) return transformAlphabet(c)
+        return transformPunctuation(c)
+    }
+
     override fun onPopupAction(action: PopupAction) {
         val newAction = when (action) {
             is PopupAction.PreviewAction -> {
                 var popLabel = action.labelContent
                 if (capsState != CapsState.None || curImeName != labelNeedIme) {
-                    popLabel = transformInputString(action.content)
+                    popLabel = transformPopupPreview(action.content)
                 }
                 action.copy(content = popLabel)
             }
             is PopupAction.PreviewUpdateAction -> {
                 var popLabel = action.labelContent
                 if (capsState != CapsState.None || curImeName != labelNeedIme) {
-                    popLabel = transformInputString(action.content)
+                    popLabel = transformPopupPreview(action.content)
                 }
                 action.copy(content = popLabel)
             }
@@ -205,13 +213,18 @@ class TextKeyboard(
     }
 
     private fun switchCapsState(lock: Boolean = false) {
-        capsState = if (lock) when (capsState) {
-            CapsState.Lock -> CapsState.None
-            else -> CapsState.Lock
-        } else when (capsState) {
-            CapsState.None -> CapsState.Once
-            else -> CapsState.None
-        }
+        capsState =
+            if (lock) {
+                when (capsState) {
+                    CapsState.Lock -> CapsState.None
+                    else -> CapsState.Lock
+                }
+            } else {
+                when (capsState) {
+                    CapsState.None -> CapsState.Once
+                    else -> CapsState.None
+                }
+            }
         updateCapsButtonIcon()
         updateAlphabetKeys()
     }
