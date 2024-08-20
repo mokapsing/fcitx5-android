@@ -170,6 +170,9 @@ class Fcitx(private val context: Context) : FcitxAPI, FcitxLifecycleOwner {
     override suspend fun triggerCandidateAction(idx: Int, actionIdx: Int) =
         withFcitxContext { triggerFcitxCandidateAction(idx, actionIdx) }
 
+    override suspend fun setCandidatePagingMode(mode: Int) =
+        withFcitxContext { setFcitxCandidatePagingMode(mode) }
+
     init {
         if (lifecycle.currentState != FcitxLifecycle.State.STOPPED)
             throw IllegalAccessException("Fcitx5 has already been created!")
@@ -342,6 +345,9 @@ class Fcitx(private val context: Context) : FcitxAPI, FcitxLifecycleOwner {
 
         @JvmStatic
         external fun triggerFcitxCandidateAction(idx: Int, actionIdx: Int)
+
+        @JvmStatic
+        external fun setFcitxCandidatePagingMode(mode: Int)
 
         @JvmStatic
         external fun loopOnce()
