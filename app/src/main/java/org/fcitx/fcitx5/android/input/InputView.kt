@@ -47,7 +47,7 @@ import org.fcitx.fcitx5.android.input.picker.emojiPicker
 import org.fcitx.fcitx5.android.input.picker.emoticonPicker
 import org.fcitx.fcitx5.android.input.picker.symbolPicker
 import org.fcitx.fcitx5.android.input.popup.PopupComponent
-import org.fcitx.fcitx5.android.input.preedit.PreeditComponent
+//import org.fcitx.fcitx5.android.input.preedit.PreeditComponent
 import org.fcitx.fcitx5.android.input.wm.InputWindowManager
 import org.fcitx.fcitx5.android.utils.styledFloat
 import org.fcitx.fcitx5.android.utils.unset
@@ -135,7 +135,7 @@ class InputView(
     private val punctuation = PunctuationComponent()
     private val returnKeyDrawable = ReturnKeyDrawableComponent()
     private val preeditEmptyState = PreeditEmptyStateComponent()
-    private val preedit = PreeditComponent()
+    //private val preedit = PreeditComponent()
     private val commonKeyActionListener = CommonKeyActionListener()
     private val windowManager = InputWindowManager()
     private val kawaiiBar = KawaiiBarComponent()
@@ -156,7 +156,7 @@ class InputView(
         scope += punctuation
         scope += returnKeyDrawable
         scope += preeditEmptyState
-        scope += preedit
+        //scope += preedit
         scope += commonKeyActionListener
         scope += windowManager
         scope += kawaiiBar
@@ -321,10 +321,10 @@ class InputView(
 
         updateKeyboardSize()
 
-        add(preedit.ui.root, lParams(matchParent, wrapContent) {
+        /* add(preedit.ui.root, lParams(matchParent, wrapContent) {
             above(keyboardView)
             centerHorizontally()
-        })
+        }) */
         add(keyboardView, lParams(matchParent, wrapContent) {
             centerHorizontally()
             bottomOfParent()
@@ -369,7 +369,7 @@ class InputView(
                 endToStartOf(rightPaddingSpace)
             }
         }
-        preedit.ui.root.setPadding(sidePadding, 0, sidePadding * 14, sidePadding * 5)
+        //preedit.ui.root.setPadding(sidePadding, 0, sidePadding * 14, sidePadding * 5)
         kawaiiBar.view.setPadding(sidePadding, 0, sidePadding, 0)
     }
 
@@ -409,10 +409,10 @@ class InputView(
                 preeditEmptyState.updatePreeditEmptyState(clientPreedit = it.data)
                 broadcaster.onClientPreeditUpdate(it.data)
             }
-            is FcitxEvent.InputPanelEvent -> {
+            /*is FcitxEvent.InputPanelEvent -> {
                 preeditEmptyState.updatePreeditEmptyState(preedit = it.data.preedit)
                 broadcaster.onInputPanelUpdate(it.data)
-            }
+            }*/
             is FcitxEvent.IMChangeEvent -> {
                 broadcaster.onImeUpdate(it.data)
             }

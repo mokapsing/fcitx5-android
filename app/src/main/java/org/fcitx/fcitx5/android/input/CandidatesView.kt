@@ -8,6 +8,7 @@ package org.fcitx.fcitx5.android.input
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -257,7 +258,12 @@ class CandidatesView(
 
     init {
         verticalPadding = dp(8)
-        backgroundColor = theme.backgroundColor
+        val shapeDrawable = GradientDrawable().apply {
+            shape = GradientDrawable.RECTANGLE
+            cornerRadius = dp(4).toFloat()  // 设置圆角半径
+            setColor(theme.backgroundColor)  // 设置背景色
+        }
+        background = shapeDrawable  // 将ShapeDrawable设置为背景
         add(preeditUi.root, lParams(wrapContent, wrapContent) {
             topOfParent()
             startOfParent()

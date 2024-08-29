@@ -473,7 +473,9 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
                 visibleTopInsets = h
                 touchableInsets = Insets.TOUCHABLE_INSETS_VISIBLE
             }
-            return
+            if (!super.onEvaluateInputViewShown()) {
+                return
+            }
         }
         inputView?.keyboardView?.getLocationInWindow(inputViewLocation)
         outInsets.apply {
@@ -621,18 +623,19 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
     override fun onStartInputView(info: EditorInfo, restarting: Boolean) {
         startedInputView = true
         Timber.d("onStartInputView: restarting=$restarting")
-        val useVirtualKeyboard = super.onEvaluateInputViewShown()
+        //val useVirtualKeyboard = super.onEvaluateInputViewShown()
         // monitor cursor anchor only when needed, ie
         // InputView just becomes visible && using floating CandidatesView
-        if (!restarting && !useVirtualKeyboard) {
+        if (!restarting /* && !useVirtualKeyboard */) {
             currentInputConnection?.monitorCursorAnchor()
         }
         postFcitxJob {
             focus(true)
-            setCandidatePagingMode(if (useVirtualKeyboard) 0 else 1)
+            setCandidatePagingMode(/* if (useVirtualKeyboard) 0 else */ 1)
         }
-        if (useVirtualKeyboard) {
-            candidatesView?.handleEvents = false
+        //if (useVirtualKeyboard) {
+        if (super.onEvaluateInputViewShown()) {
+            candidatesView?.handleEvents = true
             inputView?.handleEvents = true
             inputView?.visibility = View.VISIBLE
             // because onStartInputView will always be called after onStartInput,
@@ -692,6 +695,14 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
         anchorPosition[1] -= yOffset
         anchorPosition[2] -= xOffset
         anchorPosition[3] -= yOffset
+        // candidateView should always be above on inputView
+        // when use VirtualKeyboard 
+        if (super.onEvaluateInputViewShown()) {
+            inputView?.keyboardView?.getLocationInWindow(inputViewLocation)
+            if (inputViewLocation[1] > 0) {
+                contentSize[1] = inputViewLocation[1].toFloat()
+            }
+        }
         candidatesView?.updateCursorAnchor(anchorPosition, contentSize)
     }
 
