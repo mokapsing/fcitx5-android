@@ -42,6 +42,11 @@ class AppPrefs(private val sharedPreferences: SharedPreferences) {
             "vivo_keypress_workaround",
             DeviceUtil.isVivoOriginOS
         )
+        val cursorAnchorWorkaround = switch(
+            R.string.cursor_anchor_workaround,
+            "cursor_anchor_workaround",
+            true
+        )
     }
 
     inner class Keyboard : ManagedPreferenceCategory(R.string.keyboard, sharedPreferences) {
@@ -318,7 +323,8 @@ class AppPrefs(private val sharedPreferences: SharedPreferences) {
                 internal.editorInfoInspector,
                 advanced.ignoreSystemCursor,
                 advanced.disableAnimation,
-                advanced.vivoKeypressWorkaround
+                advanced.vivoKeypressWorkaround,
+                advanced.cursorAnchorWorkaround
             ).forEach {
                 it.putValueTo(this@edit)
             }

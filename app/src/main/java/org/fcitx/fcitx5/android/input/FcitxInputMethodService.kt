@@ -112,6 +112,8 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
 
     private val ignoreSystemCursor by AppPrefs.getInstance().advanced.ignoreSystemCursor
 
+    private val cursorAnchorWorkaround by AppPrefs.getInstance().advanced.cursorAnchorWorkaround
+
     private val inlineSuggestions by AppPrefs.getInstance().keyboard.inlineSuggestions
 
     @Keep
@@ -463,6 +465,29 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
         win.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
     }
 
+    private fun setCandidateDefaultPosition() {
+        val useVirtualKeyboard = super.onEvaluateInputViewShown()
+        updateDecorLocation(false)
+        val gapValue = 20f
+        if (useVirtualKeyboard) {
+            inputView?.keyboardView?.getLocationInWindow(inputViewLocation)
+            anchorPosition[0] = inputViewLocation[0].toFloat() + gapValue
+            anchorPosition[1] = inputViewLocation[1].toFloat() - gapValue
+            anchorPosition[2] = inputViewLocation[0].toFloat() + gapValue
+            anchorPosition[3] = inputViewLocation[1].toFloat() - gapValue
+            if (inputViewLocation[1] > 0) {
+                contentSize[1] = inputViewLocation[1].toFloat() - gapValue
+            }
+        } else {
+            anchorPosition[0] = 0f + gapValue
+            anchorPosition[1] = contentSize[1] - gapValue
+            anchorPosition[2] = 0f + gapValue
+            anchorPosition[3] = contentSize[1] - gapValue
+        }
+        contentSize[0] = contentSize[0] + gapValue
+        candidatesView?.updateCursorAnchor(anchorPosition, contentSize)
+    }
+
     private var inputViewLocation = intArrayOf(0, 0)
 
     override fun onComputeInsets(outInsets: Insets) {
@@ -483,6 +508,9 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
             visibleTopInsets = inputViewLocation[1]
             touchableInsets = Insets.TOUCHABLE_INSETS_VISIBLE
         }
+        /*if (isPkgInWhiteList) {
+            setCandidateDefaultPosition()
+        }*/
     }
 
     // always show InputView since we delegate CandidatesView's visibility to it
@@ -543,10 +571,15 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
     }
 
     private var firstBindInput = true
+    private var isPkgInWhiteList = false
+    private val pkgWhiteList = arrayOf("com.taobao.idlefish", "com.termux")
 
     override fun onBindInput() {
         val uid = currentInputBinding.uid
         val pkgName = pkgNameCache.forUid(uid)
+        if (cursorAnchorWorkaround && (pkgName in pkgWhiteList)) {
+            isPkgInWhiteList = true
+        }
         Timber.d("onBindInput: uid=$uid pkg=$pkgName")
         postFcitxJob {
             // ensure InputContext has been created before focusing it
@@ -646,6 +679,9 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
             inputView?.handleEvents = false
             inputView?.visibility = View.GONE
         }
+        if (isPkgInWhiteList) {
+            setCandidateDefaultPosition()
+        }
     }
 
     override fun onUpdateSelection(
@@ -668,18 +704,21 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
     private val decorLocationInt = intArrayOf(0, 0)
     private var decorLocationUpdated = false
 
-    private fun updateDecorLocation() {
+    private fun updateDecorLocation(flag: Boolean) {
         contentSize[0] = contentView.width.toFloat()
         contentSize[1] = contentView.height.toFloat()
         decorView.getLocationOnScreen(decorLocationInt)
         decorLocation[0] = decorLocationInt[0].toFloat()
         decorLocation[1] = decorLocationInt[1].toFloat()
-        decorLocationUpdated = true
+        decorLocationUpdated = flag
     }
 
     private val anchorPosition = floatArrayOf(0f, 0f, 0f, 0f)
 
     override fun onUpdateCursorAnchorInfo(info: CursorAnchorInfo) {
+        if (isPkgInWhiteList) {
+            return
+        }
         anchorPosition[0] = info.insertionMarkerHorizontal
         anchorPosition[1] = info.insertionMarkerBottom
         anchorPosition[2] = info.insertionMarkerHorizontal
@@ -688,7 +727,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
         info.matrix.mapPoints(anchorPosition)
         // avoid calling `decorView.getLocationOnScreen` repeatedly
         if (!decorLocationUpdated) {
-            updateDecorLocation()
+            updateDecorLocation(true)
         }
         val (xOffset, yOffset) = decorLocation
         anchorPosition[0] -= xOffset
@@ -922,6 +961,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
         cursorUpdateIndex = 0
         // currentInputBinding can be null on some devices under some special Multi-screen mode
         val uid = currentInputBinding?.uid ?: return
+        isPkgInWhiteList = false
         Timber.d("onUnbindInput: uid=$uid")
         postFcitxJob {
             deactivate(uid)

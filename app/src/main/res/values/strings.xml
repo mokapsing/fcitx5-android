@@ -270,4 +270,5 @@
     <string name="restart_to_apply_settings">Application will restart to apply new settings. Proceed?</string>
     <string name="space_swipe_move_cursor">Swipe on space key to move cursor</string>
     <string name="please_wait">Please wait…</string>
+    <string name="cursor_anchor_workaround">cursor anchor workaround for some apps</string>
 </resources>
