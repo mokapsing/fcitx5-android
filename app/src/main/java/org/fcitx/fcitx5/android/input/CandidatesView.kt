@@ -11,6 +11,7 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnPreDrawListener
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.Size
@@ -29,6 +30,7 @@ import org.fcitx.fcitx5.android.daemon.FcitxConnection
 import org.fcitx.fcitx5.android.data.theme.Theme
 import org.fcitx.fcitx5.android.input.candidates.CandidateItemUi
 import org.fcitx.fcitx5.android.input.preedit.PreeditUi
+import org.fcitx.fcitx5.android.utils.styledFloat
 import splitties.dimensions.dp
 import splitties.resources.drawable
 import splitties.views.backgroundColor
@@ -64,7 +66,9 @@ class CandidatesView(
             field = value
             visibility = View.GONE
             if (field) {
-                setupFcitxEventHandler()
+                if (eventHandlerJob == null) {
+                    setupFcitxEventHandler()
+                }
             } else {
                 eventHandlerJob?.cancel()
                 eventHandlerJob = null
@@ -146,18 +150,20 @@ class CandidatesView(
         }
     }
 
+    private val updatePositionListener = OnPreDrawListener {
+        if (shouldUpdatePosition) {
+            updatePosition()
+        }
+        true
+    }
+
     private val recyclerView = recyclerView {
         isFocusable = false
         horizontalPadding = dp(8)
         adapter = candidatesAdapter
         layoutManager = candidatesLayoutManager
         // update position after layout child views and before drawing to avoid flicker
-        viewTreeObserver.addOnPreDrawListener {
-            if (shouldUpdatePosition) {
-                updatePosition()
-            }
-            true
-        }
+        this@CandidatesView.viewTreeObserver.addOnPreDrawListener(updatePositionListener)
     }
 
     private fun createIcon(@DrawableRes icon: Int) = imageView {
@@ -280,6 +286,7 @@ class CandidatesView(
 
     override fun onDetachedFromWindow() {
         handleEvents = false
+        viewTreeObserver.removeOnPreDrawListener(updatePositionListener)
         super.onDetachedFromWindow()
     }
 }
