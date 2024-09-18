@@ -411,10 +411,10 @@ class InputView(
                 preeditEmptyState.updatePreeditEmptyState(clientPreedit = it.data)
                 broadcaster.onClientPreeditUpdate(it.data)
             }
-            /*is FcitxEvent.InputPanelEvent -> {
-                preeditEmptyState.updatePreeditEmptyState(preedit = it.data.preedit)
+            is FcitxEvent.InputPanelEvent -> {
+                //preeditEmptyState.updatePreeditEmptyState(preedit = it.data.preedit)
                 broadcaster.onInputPanelUpdate(it.data)
-            }*/
+            }
             is FcitxEvent.IMChangeEvent -> {
                 broadcaster.onImeUpdate(it.data)
             }

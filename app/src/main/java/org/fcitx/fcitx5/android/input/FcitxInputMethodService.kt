@@ -656,7 +656,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
     override fun onStartInputView(info: EditorInfo, restarting: Boolean) {
         startedInputView = true
         Timber.d("onStartInputView: restarting=$restarting")
-        //val useVirtualKeyboard = super.onEvaluateInputViewShown()
+        val useVirtualKeyboard = super.onEvaluateInputViewShown()
         // monitor cursor anchor only when needed, ie
         // InputView just becomes visible && using floating CandidatesView
         if (!restarting /* && !useVirtualKeyboard */) {
@@ -664,10 +664,10 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
         }
         postFcitxJob {
             focus(true)
-            setCandidatePagingMode(/* if (useVirtualKeyboard) 0 else */ 1)
+            setCandidatePagingMode(if (useVirtualKeyboard) 0 else 1)
         }
-        //if (useVirtualKeyboard) {
-        if (super.onEvaluateInputViewShown()) {
+        if (useVirtualKeyboard) {
+        //if (super.onEvaluateInputViewShown()) {
             candidatesView?.handleEvents = true
             inputView?.handleEvents = true
             inputView?.visibility = View.VISIBLE
