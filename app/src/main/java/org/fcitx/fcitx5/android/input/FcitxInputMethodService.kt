@@ -740,6 +740,15 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
             inputView?.keyboardView?.getLocationInWindow(inputViewLocation)
             if (inputViewLocation[1] > 0) {
                 contentSize[1] = inputViewLocation[1].toFloat()
+                if (anchorPosition[1] > contentSize[1]) { //when in chatgpt online web 
+                    val gapValue = 20f
+                    anchorPosition[0] = inputViewLocation[0].toFloat() + gapValue
+                    anchorPosition[1] = inputViewLocation[1].toFloat() - gapValue
+                    anchorPosition[2] = inputViewLocation[0].toFloat() + gapValue
+                    anchorPosition[3] = inputViewLocation[1].toFloat() - gapValue
+                    contentSize[1] = inputViewLocation[1].toFloat() - gapValue
+                    contentSize[0] = contentSize[0] + gapValue
+                }
             }
         }
         candidatesView?.updateCursorAnchor(anchorPosition, contentSize)
