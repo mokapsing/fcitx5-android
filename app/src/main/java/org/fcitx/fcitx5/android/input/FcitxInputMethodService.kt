@@ -572,7 +572,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
 
     private var firstBindInput = true
     private var isPkgInWhiteList = false
-    private val pkgWhiteList = arrayOf("com.taobao.idlefish", "com.termux")
+    private val pkgWhiteList = arrayOf("com.tencent.wework", "com.taobao.idlefish", "com.termux")
 
     override fun onBindInput() {
         val uid = currentInputBinding.uid
