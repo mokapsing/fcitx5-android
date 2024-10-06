@@ -8,11 +8,13 @@ package org.fcitx.fcitx5.android.input
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnPreDrawListener
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.Size
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
@@ -242,7 +244,13 @@ class CandidatesView(
         visibility = GONE
 
         verticalPadding = dp(8)
-        backgroundColor = theme.backgroundColor
+        //backgroundColor = theme.backgroundColor
+        val shapeDrawable = GradientDrawable().apply {
+            shape = GradientDrawable.RECTANGLE
+            cornerRadius = dp(4).toFloat()  // 设置圆角半径
+            setColor(theme.backgroundColor)  // 设置背景色
+        }
+        background = shapeDrawable  // 将ShapeDrawable设置为背景
         add(preeditUi.root, lParams(wrapContent, wrapContent) {
             topOfParent()
             startOfParent()

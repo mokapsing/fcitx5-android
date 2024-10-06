@@ -522,6 +522,28 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
         win.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
     }
 
+    private fun setCandidateViewDefaultPosition() {
+        val useVirtualKeyboard = super.onEvaluateInputViewShown()
+        val gapValue = 20f
+        if (useVirtualKeyboard) {
+            inputView?.keyboardView?.getLocationInWindow(inputViewLocation)
+            anchorPosition[0] = inputViewLocation[0].toFloat() + gapValue
+            anchorPosition[1] = inputViewLocation[1].toFloat() - gapValue
+            anchorPosition[2] = inputViewLocation[0].toFloat() + gapValue
+            anchorPosition[3] = inputViewLocation[1].toFloat() - gapValue
+            if (inputViewLocation[1] > 0) {
+                contentSize[1] = inputViewLocation[1].toFloat() - gapValue
+            }
+        } else {
+            anchorPosition[0] = 0f + gapValue
+            anchorPosition[1] = contentSize[1] - gapValue
+            anchorPosition[2] = 0f + gapValue
+            anchorPosition[3] = contentSize[1] - gapValue
+        }
+        //contentSize[0] = contentSize[0] + gapValue
+        candidatesView?.updateCursorAnchor(anchorPosition, contentSize)
+    }
+
     private var inputViewLocation = intArrayOf(0, 0)
 
     override fun onComputeInsets(outInsets: Insets) {
@@ -532,7 +554,9 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
                 visibleTopInsets = h
                 touchableInsets = Insets.TOUCHABLE_INSETS_VISIBLE
             }
-            return
+            if (!super.onEvaluateInputViewShown()) {
+                return
+            }
         }
         inputView?.keyboardView?.getLocationInWindow(inputViewLocation)
         outInsets.apply {
@@ -688,7 +712,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
         val useVirtualKeyboard = super.onEvaluateInputViewShown()
         // monitor cursor anchor only when needed, ie
         // InputView just becomes visible && using floating CandidatesView
-        if (!restarting && !useVirtualKeyboard) {
+        if (!restarting /* && !useVirtualKeyboard */) {
             currentInputConnection?.monitorCursorAnchor()
         }
         postFcitxJob {
@@ -696,7 +720,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
             setCandidatePagingMode(if (useVirtualKeyboard) 0 else 1)
         }
         if (useVirtualKeyboard) {
-            candidatesView?.handleEvents = false
+            candidatesView?.handleEvents = true
             inputView?.handleEvents = true
             inputView?.visibility = View.VISIBLE
             // because onStartInputView will always be called after onStartInput,
@@ -759,17 +783,36 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
             anchorPosition[2] = info.insertionMarkerHorizontal
             anchorPosition[3] = info.insertionMarkerTop
         }
-        // params of `Matrix.mapPoints` must be [x0, y0, x1, y1]
-        info.matrix.mapPoints(anchorPosition)
         // avoid calling `decorView.getLocationOnScreen` repeatedly
         if (!decorLocationUpdated) {
             updateDecorLocation()
         }
+        if (anchorPosition.any(Float::isNaN)) {
+            setCandidateViewDefaultPosition()
+            return
+        }
+        // params of `Matrix.mapPoints` must be [x0, y0, x1, y1]
+        info.matrix.mapPoints(anchorPosition)
         val (xOffset, yOffset) = decorLocation
         anchorPosition[0] -= xOffset
         anchorPosition[1] -= yOffset
         anchorPosition[2] -= xOffset
         anchorPosition[3] -= yOffset
+        if (super.onEvaluateInputViewShown()) {
+            inputView?.keyboardView?.getLocationInWindow(inputViewLocation)
+            if (inputViewLocation[1] > 0) {
+                contentSize[1] = inputViewLocation[1].toFloat()
+                if (anchorPosition[1] > contentSize[1]) { //when in chatgpt online web 
+                    val gapValue = 20f
+                    anchorPosition[0] = inputViewLocation[0].toFloat() + gapValue
+                    anchorPosition[1] = inputViewLocation[1].toFloat() - gapValue
+                    anchorPosition[2] = inputViewLocation[0].toFloat() + gapValue
+                    anchorPosition[3] = inputViewLocation[1].toFloat() - gapValue
+                    contentSize[1] = inputViewLocation[1].toFloat() - gapValue
+                    //contentSize[0] = contentSize[0] + gapValue
+                }
+            }
+        }
         candidatesView?.updateCursorAnchor(anchorPosition, contentSize)
     }
 
